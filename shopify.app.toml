@@ -2,12 +2,11 @@
 
 client_id = "023e89c2a341e84040d1acaa6bbd8960"
 name = "FlowerStation Utils"
-application_url = "https://example.com"
+application_url = "https://flowerstation-utils-app-production.up.railway.app"
 embedded = true
 
 [build]
-automatically_update_urls_on_dev = true
-include_config_on_deploy = true
+automatically_update_urls_on_dev = false
 
 [webhooks]
 api_version = "2026-04"
@@ -25,4 +24,4 @@ api_version = "2026-04"
 scopes = "write_discounts,read_discounts,write_price_rules,read_price_rules"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [ "https://flowerstation-utils-app-production.up.railway.app/api/auth" ]
