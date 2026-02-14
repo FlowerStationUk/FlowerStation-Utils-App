@@ -9,8 +9,8 @@ generator client {
 // enough when changing adapters.
 // See https://www.prisma.io/docs/orm/reference/prisma-schema-reference#string for more information
 datasource db {
-  provider = "sqlite"
-  url      = "file:dev.sqlite"
+  provider = "postgresql"
+  url      = env("DATABASE_PUBLIC_URL")
 }
 
 model Session {
@@ -31,4 +31,42 @@ model Session {
   emailVerified Boolean?  @default(false)
   refreshToken        String?
   refreshTokenExpires DateTime?
+}
+
+model DiscountSet {
+  id              String    @id @default(cuid())
+  name            String
+  shop            String
+  masterDiscountId String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  discounts       Discount[]
+
+  @@index([shop])
+}
+
+model Discount {
+  id              String      @id @default(cuid())
+  shop            String
+  shopifyId       String?     // Shopify discount ID after creation
+  code            String
+  masterDiscountId String
+  discountSetId   String?
+  status          DiscountStatus @default(PENDING)
+  errorMessage    String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  discountSet     DiscountSet? @relation(fields: [discountSetId], references: [id], onDelete: Cascade)
+
+  @@index([shop])
+  @@index([shopifyId])
+  @@index([discountSetId])
+  @@unique([shop, code])
+}
+
+enum DiscountStatus {
+  PENDING
+  CREATED
+  FAILED
 }
