@@ -104,7 +104,7 @@ export const action = async ({ request }) => {
                   }
                   context {
                     ... on DiscountBuyerSelectionAll {
-                      allBuyers
+                      all
                     }
                     ... on DiscountCustomers {
                       customers {
