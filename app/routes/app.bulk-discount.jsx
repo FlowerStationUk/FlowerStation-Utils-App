@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useFetcher } from "react-router";
+import { useFetcher, useLoaderData } from "react-router";
 import { authenticate } from "../shopify.server";
 import db from "../db.server";
 
@@ -30,6 +30,12 @@ export const action = async ({ request }) => {
       const masterDiscountId = formData.get("masterDiscountId");
       const discountSetName = formData.get("discountSetName");
       const codes = JSON.parse(formData.get("codes"));
+
+      // Convert simple ID to GraphQL format if needed
+      let formattedMasterDiscountId = masterDiscountId;
+      if (!masterDiscountId.startsWith('gid://')) {
+        formattedMasterDiscountId = `gid://shopify/DiscountCodeNode/${masterDiscountId}`;
+      }
 
       // First, fetch the master discount from Shopify
       const masterDiscountResponse = await admin.graphql(
@@ -90,7 +96,7 @@ export const action = async ({ request }) => {
                       allCustomers
                     }
                     ... on DiscountCustomers {
-                      customers(first: 10) {
+                      customers {
                         edges {
                           node {
                             id
@@ -99,7 +105,7 @@ export const action = async ({ request }) => {
                       }
                     }
                     ... on DiscountCustomerSegments {
-                      segments(first: 10) {
+                      segments {
                         edges {
                           node {
                             id
@@ -119,15 +125,26 @@ export const action = async ({ request }) => {
             }
           }`,
         {
-          variables: { id: masterDiscountId }
+          variables: { id: formattedMasterDiscountId }
         }
       );
 
       const masterDiscountData = await masterDiscountResponse.json();
+
+      // Better error handling
+      if (masterDiscountData.errors) {
+        console.error("GraphQL Errors:", masterDiscountData.errors);
+        return {
+          error: `GraphQL Error: ${masterDiscountData.errors[0].message}. Using ID: ${formattedMasterDiscountId}`
+        };
+      }
+
       const masterDiscount = masterDiscountData.data.discountNode?.discount;
 
       if (!masterDiscount) {
-        return { error: "Master discount not found" };
+        return {
+          error: `Master discount not found with ID: ${formattedMasterDiscountId}. Please check if the discount exists and the ID is correct.`
+        };
       }
 
       // Create discount set in database
@@ -135,7 +152,7 @@ export const action = async ({ request }) => {
         data: {
           name: discountSetName,
           shop: session.shop,
-          masterDiscountId: masterDiscountId
+          masterDiscountId: formattedMasterDiscountId
         }
       });
 
@@ -146,7 +163,7 @@ export const action = async ({ request }) => {
             data: {
               shop: session.shop,
               code: code,
-              masterDiscountId: masterDiscountId,
+              masterDiscountId: formattedMasterDiscountId,
               discountSetId: discountSet.id,
               status: 'PENDING'
             }
@@ -344,7 +361,11 @@ export const action = async ({ request }) => {
 
 export default function BulkDiscount() {
   const fetcher = useFetcher();
-  const { discountSets } = fetcher.data || { discountSets: [] };
+  const loaderData = useLoaderData();
+  const actionData = fetcher.data;
+
+  // Use initial data from loader, not action data for discount sets
+  const { discountSets } = loaderData;
 
   const [masterDiscountId, setMasterDiscountId] = useState("");
   const [discountSetName, setDiscountSetName] = useState("");
@@ -428,15 +449,15 @@ export default function BulkDiscount() {
   return (
     <s-page heading="Bulk Discount Management">
 
-      {fetcher.data?.error && (
+{actionData?.error && (
         <s-banner status="critical">
-          {fetcher.data.error}
+          {actionData.error}
         </s-banner>
       )}
 
-      {fetcher.data?.success && (
+      {actionData?.success && (
         <s-banner status="success">
-          {fetcher.data.message}
+          {actionData.message}
         </s-banner>
       )}
 
@@ -446,8 +467,8 @@ export default function BulkDiscount() {
             <s-text-field
               value={masterDiscountId}
               onChange={(e) => setMasterDiscountId(e.target.value)}
-              placeholder="gid://shopify/DiscountCodeNode/..."
-              help-text="Get this ID from the Shopify admin discount page URL or GraphiQL"
+              placeholder="2300842017154 or gid://shopify/DiscountCodeNode/..."
+              help-text="Enter just the number (e.g., 2300842017154) from your Shopify discount URL, or the full GraphQL ID"
             />
           </s-form-field>
 
