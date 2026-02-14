@@ -146,6 +146,9 @@ export const action = async ({ request }) => {
           // Anyone with a valid code should be able to use it
           const customerSelection = { all: true };
 
+          // Always apply to all items - no product restrictions for bulk discount codes
+          const itemSelection = { all: true };
+
           const discountInput = {
             title: `${masterDiscount.title} - ${discountRecord.code}`,
             code: discountRecord.code,
@@ -154,7 +157,7 @@ export const action = async ({ request }) => {
             customerSelection: customerSelection,
             customerGets: {
               value: masterDiscount.customerGets.value,
-              items: masterDiscount.customerGets.items || { allItems: true }
+              items: itemSelection
             },
             usageLimit: 1, // Force single use as requested
             appliesOncePerCustomer: true
