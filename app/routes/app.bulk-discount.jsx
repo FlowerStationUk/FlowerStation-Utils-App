@@ -102,12 +102,12 @@ export const action = async ({ request }) => {
                       }
                     }
                   }
-                  customerSelection {
-                    ... on DiscountCustomerAll {
-                      allCustomers
+                  context {
+                    ... on DiscountBuyerSelectionAll {
+                      allBuyers
                     }
                     ... on DiscountCustomers {
-                      customers(first: 250) {
+                      customers {
                         edges {
                           node {
                             id
@@ -180,9 +180,9 @@ export const action = async ({ request }) => {
       const createdDiscounts = [];
       for (const discountRecord of discountRecords) {
         try {
-          // Always use "all customers" - no restrictions for bulk discount codes
+          // Always use "all buyers" - no restrictions for bulk discount codes
           // Anyone with a valid code should be able to use it
-          const customerSelection = { all: true };
+          const context = { all: true };
 
           // Copy the exact items selection from master discount (specific products, collections, or all items)
           let itemSelection;
@@ -193,11 +193,11 @@ export const action = async ({ request }) => {
           } else if (masterDiscount.customerGets.items.products) {
             // Master applies to specific products - copy the exact product IDs
             const productIds = masterDiscount.customerGets.items.products.edges.map(edge => edge.node.id);
-            itemSelection = { productIds: productIds };
+            itemSelection = { products: { productsToAdd: productIds } };
           } else if (masterDiscount.customerGets.items.collections) {
             // Master applies to specific collections - copy the exact collection IDs
             const collectionIds = masterDiscount.customerGets.items.collections.edges.map(edge => edge.node.id);
-            itemSelection = { collectionIds: collectionIds };
+            itemSelection = { collections: { add: collectionIds } };
           } else {
             // Fallback to all items if structure is unexpected
             itemSelection = { all: true };
@@ -209,9 +209,16 @@ export const action = async ({ request }) => {
             title: masterDiscount.title + ' - ' + discountRecord.code, // Add code to title for identification
             startsAt: masterDiscount.startsAt,
             endsAt: masterDiscount.endsAt,
-            customerSelection: customerSelection,
+            context: { all: true }, // Always allow all buyers for bulk codes
             customerGets: {
-              value: masterDiscount.customerGets.value, // Copy the exact value structure (percentage or amount)
+              value: masterDiscount.customerGets.value.percentage
+                ? { percentage: masterDiscount.customerGets.value.percentage }
+                : {
+                    discountAmount: {
+                      amount: masterDiscount.customerGets.value.amount.amount,
+                      appliesOnEachItem: false
+                    }
+                  },
               items: itemSelection
             },
             minimumRequirement: masterDiscount.minimumRequirement, // Copy minimum order requirements
