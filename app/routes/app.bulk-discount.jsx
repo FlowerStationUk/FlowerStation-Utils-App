@@ -107,8 +107,12 @@ export const action = async ({ request }) => {
                       all
                     }
                     ... on DiscountCustomers {
-                      customers {
-                        id
+                      customers(first: 250) {
+                        edges {
+                          node {
+                            id
+                          }
+                        }
                       }
                     }
                   }
