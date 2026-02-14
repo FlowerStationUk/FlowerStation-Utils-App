@@ -147,7 +147,7 @@ export const action = async ({ request }) => {
             code: discountRecord.code,
             startsAt: masterDiscount.startsAt,
             endsAt: masterDiscount.endsAt,
-            customerSelection: masterDiscount.customerSelection || { allCustomers: true },
+            customerSelection: masterDiscount.customerSelection || { all: true },
             customerGets: {
               value: masterDiscount.customerGets.value,
               items: masterDiscount.customerGets.items || { allItems: true }
