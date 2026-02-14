@@ -142,12 +142,12 @@ export const action = async ({ request }) => {
       const createdDiscounts = [];
       for (const discountRecord of discountRecords) {
         try {
-          const discountInput = {
-            title: `${masterDiscount.title} - ${discountRecord.code}`,
-            code: discountRecord.code,
+          // Always use "all customers" - no restrictions for bulk discount codes
+          // Anyone with a valid code should be able to use it
+          const customerSelection = { all: true };
             startsAt: masterDiscount.startsAt,
             endsAt: masterDiscount.endsAt,
-            customerSelection: masterDiscount.customerSelection || { all: true },
+            customerSelection: customerSelection,
             customerGets: {
               value: masterDiscount.customerGets.value,
               items: masterDiscount.customerGets.items || { allItems: true }
