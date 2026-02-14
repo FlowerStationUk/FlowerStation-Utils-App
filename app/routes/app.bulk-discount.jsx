@@ -145,6 +145,10 @@ export const action = async ({ request }) => {
           // Always use "all customers" - no restrictions for bulk discount codes
           // Anyone with a valid code should be able to use it
           const customerSelection = { all: true };
+
+          const discountInput = {
+            title: `${masterDiscount.title} - ${discountRecord.code}`,
+            code: discountRecord.code,
             startsAt: masterDiscount.startsAt,
             endsAt: masterDiscount.endsAt,
             customerSelection: customerSelection,
