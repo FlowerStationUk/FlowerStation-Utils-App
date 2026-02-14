@@ -95,6 +95,8 @@ export const action = async ({ request }) => {
 
       const masterDiscountData = await masterDiscountResponse.json();
 
+      console.log('Master discount response:', JSON.stringify(masterDiscountData, null, 2));
+
       // Better error handling
       if (masterDiscountData.errors) {
         console.error("GraphQL Errors:", masterDiscountData.errors);
@@ -106,12 +108,13 @@ export const action = async ({ request }) => {
       const masterDiscount = masterDiscountData.data.discountNode?.discount;
 
       if (!masterDiscount) {
+        console.error('No master discount found:', masterDiscountData);
         return {
           error: `Master discount not found with ID: ${formattedMasterDiscountId}. Please check if the discount exists and the ID is correct.`
         };
       }
 
-      // Create discount set in database
+      console.log('Master discount data:', JSON.stringify(masterDiscount, null, 2));
       const discountSet = await db.discountSet.create({
         data: {
           name: discountSetName,
@@ -139,6 +142,22 @@ export const action = async ({ request }) => {
       const createdDiscounts = [];
       for (const discountRecord of discountRecords) {
         try {
+          const discountInput = {
+            title: `${masterDiscount.title} - ${discountRecord.code}`,
+            code: discountRecord.code,
+            startsAt: masterDiscount.startsAt,
+            endsAt: masterDiscount.endsAt,
+            customerSelection: masterDiscount.customerSelection || { allCustomers: true },
+            customerGets: {
+              value: masterDiscount.customerGets.value,
+              items: masterDiscount.customerGets.items || { allItems: true }
+            },
+            usageLimit: 1, // Force single use as requested
+            appliesOncePerCustomer: true
+          };
+
+          console.log(`Creating discount for code ${discountRecord.code} with input:`, JSON.stringify(discountInput, null, 2));
+
           const createDiscountResponse = await admin.graphql(
             `#graphql
               mutation discountCodeBasicCreate($basicCodeDiscount: DiscountCodeBasicInput!) {
@@ -166,37 +185,30 @@ export const action = async ({ request }) => {
               }`,
             {
               variables: {
-                basicCodeDiscount: {
-                  title: `${masterDiscount.title} - ${discountRecord.code}`,
-                  code: discountRecord.code,
-                  startsAt: masterDiscount.startsAt,
-                  endsAt: masterDiscount.endsAt,
-                  customerSelection: masterDiscount.customerSelection || { allCustomers: true },
-                  customerGets: {
-                    value: masterDiscount.customerGets.value,
-                    items: masterDiscount.customerGets.items || { allItems: true }
-                  },
-                  usageLimit: 1, // Force single use as requested
-                  appliesOncePerCustomer: true
-                }
+                basicCodeDiscount: discountInput
               }
             }
           );
 
           const createResult = await createDiscountResponse.json();
 
-          if (createResult.data.discountCodeBasicCreate.userErrors.length > 0) {
+          console.log(`Creating discount for code ${discountRecord.code}:`, JSON.stringify(createResult, null, 2));
+
+          if (createResult.data?.discountCodeBasicCreate?.userErrors?.length > 0) {
             // Update record with error
+            const errorMessage = createResult.data.discountCodeBasicCreate.userErrors[0].message;
+            console.error(`Discount creation failed for ${discountRecord.code}:`, errorMessage);
             await db.discount.update({
               where: { id: discountRecord.id },
               data: {
                 status: 'FAILED',
-                errorMessage: createResult.data.discountCodeBasicCreate.userErrors[0].message
+                errorMessage: errorMessage
               }
             });
-          } else {
+          } else if (createResult.data?.discountCodeBasicCreate?.codeDiscountNode) {
             // Update record with success
             const shopifyId = createResult.data.discountCodeBasicCreate.codeDiscountNode.id;
+            console.log(`Discount created successfully for ${discountRecord.code}:`, shopifyId);
             await db.discount.update({
               where: { id: discountRecord.id },
               data: {
@@ -208,14 +220,26 @@ export const action = async ({ request }) => {
               code: discountRecord.code,
               shopifyId: shopifyId
             });
+          } else {
+            // Unexpected response structure
+            const errorMessage = 'Unexpected response structure from Shopify API';
+            console.error(`Unexpected response for ${discountRecord.code}:`, createResult);
+            await db.discount.update({
+              where: { id: discountRecord.id },
+              data: {
+                status: 'FAILED',
+                errorMessage: errorMessage
+              }
+            });
           }
         } catch (error) {
           // Update record with error
+          console.error(`Error creating discount for code ${discountRecord.code}:`, error);
           await db.discount.update({
             where: { id: discountRecord.id },
             data: {
               status: 'FAILED',
-              errorMessage: error.message
+              errorMessage: error.message || 'Unknown error occurred'
             }
           });
         }
@@ -530,6 +554,7 @@ export default function BulkDiscount() {
                           <s-table-cell>Code</s-table-cell>
                           <s-table-cell>Status</s-table-cell>
                           <s-table-cell>Created</s-table-cell>
+                          <s-table-cell>Error</s-table-cell>
                           <s-table-cell>Actions</s-table-cell>
                         </s-table-row>
                       </s-table-head>
@@ -548,6 +573,15 @@ export default function BulkDiscount() {
                             </s-table-cell>
                             <s-table-cell>
                               {new Date(discount.createdAt).toLocaleDateString()}
+                            </s-table-cell>
+                            <s-table-cell>
+                              {discount.status === 'FAILED' && discount.errorMessage ? (
+                                <s-text size="small" color="critical">
+                                  {discount.errorMessage}
+                                </s-text>
+                              ) : (
+                                <s-text size="small" color="subdued">-</s-text>
+                              )}
                             </s-table-cell>
                             <s-table-cell>
                               <s-button
