@@ -21,7 +21,7 @@ api_version = "2026-04"
 
 [access_scopes]
 # Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
-scopes = "write_discounts,read_discounts,write_price_rules,read_price_rules"
+scopes = "write_discounts,read_discounts,write_price_rules,read_price_rules,read_products"
 
 [auth]
 redirect_urls = [ "https://flowerstation-utils-app-production.up.railway.app/api/auth" ]

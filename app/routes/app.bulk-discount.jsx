@@ -71,6 +71,24 @@ export const action = async ({ request }) => {
                       ... on AllDiscountItems {
                         allItems
                       }
+                      ... on DiscountProducts {
+                        products(first: 50) {
+                          edges {
+                            node {
+                              id
+                            }
+                          }
+                        }
+                      }
+                      ... on DiscountCollections {
+                        collections(first: 50) {
+                          edges {
+                            node {
+                              id
+                            }
+                          }
+                        }
+                      }
                     }
                   }
                   customerSelection {
@@ -146,13 +164,24 @@ export const action = async ({ request }) => {
           // Anyone with a valid code should be able to use it
           const customerSelection = { all: true };
 
-          // Always apply to all items - no product restrictions for bulk discount codes
-          const itemSelection = { all: true };
+          // Copy the exact items selection from master discount (specific products, collections, or all items)
+          let itemSelection;
 
-          const discountInput = {
-            title: `${masterDiscount.title} - ${discountRecord.code}`,
-            code: discountRecord.code,
-            startsAt: masterDiscount.startsAt,
+          if (masterDiscount.customerGets.items.allItems) {
+            // Master applies to all items - keep the same
+            itemSelection = { all: true };
+          } else if (masterDiscount.customerGets.items.products) {
+            // Master applies to specific products - copy the exact product IDs
+            const productIds = masterDiscount.customerGets.items.products.edges.map(edge => edge.node.id);
+            itemSelection = { productIds: productIds };
+          } else if (masterDiscount.customerGets.items.collections) {
+            // Master applies to specific collections - copy the exact collection IDs
+            const collectionIds = masterDiscount.customerGets.items.collections.edges.map(edge => edge.node.id);
+            itemSelection = { collectionIds: collectionIds };
+          } else {
+            // Fallback to all items if structure is unexpected
+            itemSelection = { all: true };
+          }
             endsAt: masterDiscount.endsAt,
             customerSelection: customerSelection,
             customerGets: {
