@@ -76,7 +76,6 @@ export const action = async ({ request }) => {
                           amount
                           currencyCode
                         }
-                        appliesTo
                       }
                     }
                     items {
