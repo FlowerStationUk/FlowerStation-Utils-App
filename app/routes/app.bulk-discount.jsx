@@ -172,40 +172,46 @@ export const action = async ({ request }) => {
         )
       );
 
+      // Helper function to build item selection from master discount
+      const buildItemSelection = () => {
+        if (masterDiscount.customerGets.items.allItems) {
+          return { all: true };
+        } else if (masterDiscount.customerGets.items.products) {
+          const productIds = masterDiscount.customerGets.items.products.edges.map(edge => edge.node.id);
+          return { products: { productsToAdd: productIds } };
+        } else if (masterDiscount.customerGets.items.collections) {
+          const collectionIds = masterDiscount.customerGets.items.collections.edges.map(edge => edge.node.id);
+          return { collections: { add: collectionIds } };
+        }
+        return { all: true };
+      };
+
+      // Helper function to build customer context from master discount
+      const buildCustomerContext = () => {
+        if (masterDiscount.context.all) {
+          return { all: true };
+        } else if (masterDiscount.context.customers) {
+          // Copy customer IDs - customers field is a direct array, not a connection
+          return { customers: { add: masterDiscount.context.customers.map(c => c.id) } };
+        }
+        return { all: true }; // Default to all if no context specified
+      };
+
+      const itemSelection = buildItemSelection();
+      const customerContext = buildCustomerContext();
+
       // Now create discounts in Shopify
       const createdDiscounts = [];
       for (const discountRecord of discountRecords) {
         try {
-          // Always use "all buyers" - no restrictions for bulk discount codes
-          // Anyone with a valid code should be able to use it
-          const context = { all: true };
-
-          // Copy the exact items selection from master discount (specific products, collections, or all items)
-          let itemSelection;
-
-          if (masterDiscount.customerGets.items.allItems) {
-            // Master applies to all items - keep the same
-            itemSelection = { all: true };
-          } else if (masterDiscount.customerGets.items.products) {
-            // Master applies to specific products - copy the exact product IDs
-            const productIds = masterDiscount.customerGets.items.products.edges.map(edge => edge.node.id);
-            itemSelection = { products: { productsToAdd: productIds } };
-          } else if (masterDiscount.customerGets.items.collections) {
-            // Master applies to specific collections - copy the exact collection IDs
-            const collectionIds = masterDiscount.customerGets.items.collections.edges.map(edge => edge.node.id);
-            itemSelection = { collections: { add: collectionIds } };
-          } else {
-            // Fallback to all items if structure is unexpected
-            itemSelection = { all: true };
-          }
-
-          // Create discount input copying ALL properties from master discount except code
+          // Create discount input replicating ALL properties from master discount
+          // Only difference: unique code from CSV
           const discountInput = {
-            code: discountRecord.code, // Use generated code instead of master code
-            title: masterDiscount.title + ' - ' + discountRecord.code, // Add code to title for identification
+            code: discountRecord.code,
+            title: masterDiscount.title,
             startsAt: masterDiscount.startsAt,
             endsAt: masterDiscount.endsAt,
-            context: { all: true }, // Always allow all buyers for bulk codes
+            context: customerContext, // Copy exact customer targeting from master
             customerGets: {
               value: masterDiscount.customerGets.value.percentage
                 ? { percentage: masterDiscount.customerGets.value.percentage }
@@ -217,9 +223,9 @@ export const action = async ({ request }) => {
                   },
               items: itemSelection
             },
-            minimumRequirement: masterDiscount.minimumRequirement, // Copy minimum order requirements
-            usageLimit: 1, // Force single use as requested by user
-            appliesOncePerCustomer: true // Force single use per customer
+            minimumRequirement: masterDiscount.minimumRequirement,
+            usageLimit: masterDiscount.usageLimit, // Copy exact usage limit from master
+            appliesOncePerCustomer: masterDiscount.appliesOncePerCustomer // Copy exact setting from master
           };
 
           console.log(`Creating discount for code ${discountRecord.code} with input:`, JSON.stringify(discountInput, null, 2));
@@ -258,55 +264,36 @@ export const action = async ({ request }) => {
 
           const createResult = await createDiscountResponse.json();
 
-          console.log(`Creating discount for code ${discountRecord.code}:`, JSON.stringify(createResult, null, 2));
+          // Handle discount creation result
+          const userErrors = createResult.data?.discountCodeBasicCreate?.userErrors;
+          const codeDiscountNode = createResult.data?.discountCodeBasicCreate?.codeDiscountNode;
 
-          if (createResult.data?.discountCodeBasicCreate?.userErrors?.length > 0) {
-            // Update record with error
-            const errorMessage = createResult.data.discountCodeBasicCreate.userErrors[0].message;
-            console.error(`Discount creation failed for ${discountRecord.code}:`, errorMessage);
+          if (userErrors?.length > 0) {
+            const errorMsg = userErrors.map(e => `${e.field}: ${e.message}`).join(', ');
+            console.error(`Failed: ${discountRecord.code} - ${errorMsg}`);
             await db.discount.update({
               where: { id: discountRecord.id },
-              data: {
-                status: 'FAILED',
-                errorMessage: errorMessage
-              }
+              data: { status: 'FAILED', errorMessage: errorMsg }
             });
-          } else if (createResult.data?.discountCodeBasicCreate?.codeDiscountNode) {
-            // Update record with success
-            const shopifyId = createResult.data.discountCodeBasicCreate.codeDiscountNode.id;
-            console.log(`Discount created successfully for ${discountRecord.code}:`, shopifyId);
+          } else if (codeDiscountNode) {
             await db.discount.update({
               where: { id: discountRecord.id },
-              data: {
-                status: 'CREATED',
-                shopifyId: shopifyId
-              }
+              data: { status: 'CREATED', shopifyId: codeDiscountNode.id }
             });
-            createdDiscounts.push({
-              code: discountRecord.code,
-              shopifyId: shopifyId
-            });
+            createdDiscounts.push({ code: discountRecord.code, shopifyId: codeDiscountNode.id });
           } else {
-            // Unexpected response structure
-            const errorMessage = 'Unexpected response structure from Shopify API';
-            console.error(`Unexpected response for ${discountRecord.code}:`, createResult);
+            const errorMsg = 'Unexpected API response structure';
+            console.error(`${errorMsg} for ${discountRecord.code}`);
             await db.discount.update({
               where: { id: discountRecord.id },
-              data: {
-                status: 'FAILED',
-                errorMessage: errorMessage
-              }
+              data: { status: 'FAILED', errorMessage: errorMsg }
             });
           }
         } catch (error) {
-          // Update record with error
-          console.error(`Error creating discount for code ${discountRecord.code}:`, error);
+          console.error(`Error creating ${discountRecord.code}:`, error.message);
           await db.discount.update({
             where: { id: discountRecord.id },
-            data: {
-              status: 'FAILED',
-              errorMessage: error.message || 'Unknown error occurred'
-            }
+            data: { status: 'FAILED', errorMessage: error.message || 'Unknown error' }
           });
         }
       }
@@ -428,26 +415,24 @@ export default function BulkDiscount() {
 
   const handleCsvChange = (event) => {
     const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const content = e.target.result;
-        setCsvContent(content);
+    if (!file) return;
 
-        // Parse CSV content - assume simple format: one code per line or comma-separated
-        const lines = content.split('\n').filter(line => line.trim());
-        const codes = [];
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const content = e.target.result;
+      setCsvContent(content);
 
-        lines.forEach(line => {
-          const lineCodes = line.split(',').map(code => code.trim()).filter(code => code);
-          codes.push(...lineCodes);
-        });
+      // Parse CSV: supports one code per line or comma-separated
+      const codes = content
+        .split(/[\n,]/) // Split by newlines or commas
+        .map(code => code.trim()) // Trim whitespace
+        .filter(code => code && code.length > 0) // Remove empty entries
+        .filter((code, index, self) => self.indexOf(code) === index); // Remove duplicates
 
-        setParsedCodes([...new Set(codes)]); // Remove duplicates
-        setShowPreview(true);
-      };
-      reader.readAsText(file);
-    }
+      setParsedCodes(codes);
+      setShowPreview(codes.length > 0);
+    };
+    reader.readAsText(file);
   };
 
   const handleGenerateDiscounts = () => {
