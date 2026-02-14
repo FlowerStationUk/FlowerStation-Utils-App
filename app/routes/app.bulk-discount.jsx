@@ -55,6 +55,17 @@ export const action = async ({ request }) => {
                       }
                     }
                   }
+                  minimumRequirement {
+                    ... on DiscountMinimumSubtotal {
+                      greaterThanOrEqualToSubtotal {
+                        amount
+                        currencyCode
+                      }
+                    }
+                    ... on DiscountMinimumQuantity {
+                      greaterThanOrEqualToQuantity
+                    }
+                  }
                   customerGets {
                     value {
                       ... on DiscountPercentage {
@@ -65,6 +76,7 @@ export const action = async ({ request }) => {
                           amount
                           currencyCode
                         }
+                        appliesTo
                       }
                     }
                     items {
@@ -72,7 +84,7 @@ export const action = async ({ request }) => {
                         allItems
                       }
                       ... on DiscountProducts {
-                        products(first: 50) {
+                        products(first: 250) {
                           edges {
                             node {
                               id
@@ -81,7 +93,7 @@ export const action = async ({ request }) => {
                         }
                       }
                       ... on DiscountCollections {
-                        collections(first: 50) {
+                        collections(first: 250) {
                           edges {
                             node {
                               id
@@ -94,6 +106,15 @@ export const action = async ({ request }) => {
                   customerSelection {
                     ... on DiscountCustomerAll {
                       allCustomers
+                    }
+                    ... on DiscountCustomers {
+                      customers(first: 250) {
+                        edges {
+                          node {
+                            id
+                          }
+                        }
+                      }
                     }
                   }
                   usageLimit
@@ -182,14 +203,21 @@ export const action = async ({ request }) => {
             // Fallback to all items if structure is unexpected
             itemSelection = { all: true };
           }
+
+          // Create discount input copying ALL properties from master discount except code
+          const discountInput = {
+            code: discountRecord.code, // Use generated code instead of master code
+            title: masterDiscount.title + ' - ' + discountRecord.code, // Add code to title for identification
+            startsAt: masterDiscount.startsAt,
             endsAt: masterDiscount.endsAt,
             customerSelection: customerSelection,
             customerGets: {
-              value: masterDiscount.customerGets.value,
+              value: masterDiscount.customerGets.value, // Copy the exact value structure (percentage or amount)
               items: itemSelection
             },
-            usageLimit: 1, // Force single use as requested
-            appliesOncePerCustomer: true
+            minimumRequirement: masterDiscount.minimumRequirement, // Copy minimum order requirements
+            usageLimit: 1, // Force single use as requested by user
+            appliesOncePerCustomer: true // Force single use per customer
           };
 
           console.log(`Creating discount for code ${discountRecord.code} with input:`, JSON.stringify(discountInput, null, 2));
