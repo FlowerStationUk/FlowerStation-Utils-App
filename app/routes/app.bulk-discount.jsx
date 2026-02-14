@@ -175,7 +175,7 @@ export const action = async ({ request }) => {
       // Helper function to build item selection from master discount
       const buildItemSelection = () => {
         if (masterDiscount.customerGets.items.allItems) {
-          return { all: true };
+          return { all: "ALL" };
         } else if (masterDiscount.customerGets.items.products) {
           const productIds = masterDiscount.customerGets.items.products.edges.map(edge => edge.node.id);
           return { products: { productsToAdd: productIds } };
@@ -183,18 +183,18 @@ export const action = async ({ request }) => {
           const collectionIds = masterDiscount.customerGets.items.collections.edges.map(edge => edge.node.id);
           return { collections: { add: collectionIds } };
         }
-        return { all: true };
+        return { all: "ALL" };
       };
 
       // Helper function to build customer context from master discount
       const buildCustomerContext = () => {
         if (masterDiscount.context.all) {
-          return { all: true };
+          return { all: "ALL" };
         } else if (masterDiscount.context.customers) {
           // Copy customer IDs - customers field is a direct array, not a connection
           return { customers: { add: masterDiscount.context.customers.map(c => c.id) } };
         }
-        return { all: true }; // Default to all if no context specified
+        return { all: "ALL" }; // Default to all if no context specified
       };
 
       const itemSelection = buildItemSelection();
