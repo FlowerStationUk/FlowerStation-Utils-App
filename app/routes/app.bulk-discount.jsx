@@ -108,11 +108,7 @@ export const action = async ({ request }) => {
                     }
                     ... on DiscountCustomers {
                       customers {
-                        edges {
-                          node {
-                            id
-                          }
-                        }
+                        id
                       }
                     }
                   }
