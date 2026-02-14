@@ -71,24 +71,6 @@ export const action = async ({ request }) => {
                       ... on AllDiscountItems {
                         allItems
                       }
-                      ... on DiscountProducts {
-                        products(first: 10) {
-                          edges {
-                            node {
-                              id
-                            }
-                          }
-                        }
-                      }
-                      ... on DiscountCollections {
-                        collections(first: 10) {
-                          edges {
-                            node {
-                              id
-                            }
-                          }
-                        }
-                      }
                     }
                   }
                   customerSelection {
@@ -192,11 +174,10 @@ export const action = async ({ request }) => {
                   customerSelection: masterDiscount.customerSelection || { allCustomers: true },
                   customerGets: {
                     value: masterDiscount.customerGets.value,
-                    items: masterDiscount.customerGets.items
+                    items: masterDiscount.customerGets.items || { allItems: true }
                   },
                   usageLimit: 1, // Force single use as requested
-                  appliesOncePerCustomer: true,
-                  recurringCycleLimit: masterDiscount.recurringCycleLimit
+                  appliesOncePerCustomer: true
                 }
               }
             }
