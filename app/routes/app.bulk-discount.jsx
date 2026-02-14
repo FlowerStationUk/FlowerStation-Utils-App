@@ -95,24 +95,6 @@ export const action = async ({ request }) => {
                     ... on DiscountCustomerAll {
                       allCustomers
                     }
-                    ... on DiscountCustomers {
-                      customers {
-                        edges {
-                          node {
-                            id
-                          }
-                        }
-                      }
-                    }
-                    ... on DiscountCustomerSegments {
-                      segments {
-                        edges {
-                          node {
-                            id
-                          }
-                        }
-                      }
-                    }
                   }
                   usageLimit
                   appliesOncePerCustomer
@@ -207,7 +189,7 @@ export const action = async ({ request }) => {
                   code: discountRecord.code,
                   startsAt: masterDiscount.startsAt,
                   endsAt: masterDiscount.endsAt,
-                  customerSelection: masterDiscount.customerSelection,
+                  customerSelection: masterDiscount.customerSelection || { allCustomers: true },
                   customerGets: {
                     value: masterDiscount.customerGets.value,
                     items: masterDiscount.customerGets.items
