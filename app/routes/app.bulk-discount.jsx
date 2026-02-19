@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useFetcher, useLoaderData } from "react-router";
+import { useState, useEffect } from "react";
+import { useFetcher, useLoaderData, useRevalidator } from "react-router";
 import { authenticate } from "../shopify.server";
 import db from "../db.server";
 
@@ -26,6 +26,7 @@ export const action = async ({ request }) => {
   const action = formData.get("action");
 
   try {
+    // STEP 1: Create discount set and save all codes to DB (fast, no Shopify API calls)
     if (action === "create_discounts") {
       const masterDiscountId = formData.get("masterDiscountId");
       const discountSetName = formData.get("discountSetName");
@@ -37,7 +38,112 @@ export const action = async ({ request }) => {
         formattedMasterDiscountId = `gid://shopify/DiscountCodeNode/${masterDiscountId}`;
       }
 
-      // First, fetch the master discount from Shopify
+      // Validate the master discount exists before creating anything
+      const masterDiscountResponse = await admin.graphql(
+        `#graphql
+          query getDiscount($id: ID!) {
+            discountNode(id: $id) {
+              id
+              discount {
+                ... on DiscountCodeBasic {
+                  title
+                }
+              }
+            }
+          }`,
+        {
+          variables: { id: formattedMasterDiscountId }
+        }
+      );
+
+      const masterDiscountData = await masterDiscountResponse.json();
+
+      if (masterDiscountData.errors) {
+        console.error("GraphQL Errors:", masterDiscountData.errors);
+        return {
+          error: `GraphQL Error: ${masterDiscountData.errors[0].message}. Using ID: ${formattedMasterDiscountId}`
+        };
+      }
+
+      if (!masterDiscountData.data.discountNode?.discount) {
+        return {
+          error: `Master discount not found with ID: ${formattedMasterDiscountId}. Please check if the discount exists.`
+        };
+      }
+
+      // Create discount set in database
+      const discountSet = await db.discountSet.create({
+        data: {
+          name: discountSetName,
+          shop: session.shop,
+          masterDiscountId: formattedMasterDiscountId
+        }
+      });
+
+      // Create all discount records as PENDING (batch insert - fast)
+      await db.discount.createMany({
+        data: codes.map(code => ({
+          shop: session.shop,
+          code: code,
+          masterDiscountId: formattedMasterDiscountId,
+          discountSetId: discountSet.id,
+          status: 'PENDING'
+        }))
+      });
+
+      return {
+        success: true,
+        message: `Queued ${codes.length} discount codes. Processing will begin automatically...`,
+        discountSetId: discountSet.id,
+        totalCodes: codes.length,
+        needsProcessing: true
+      };
+    }
+
+    // STEP 2: Process pending discounts in batches (called multiple times via polling)
+    if (action === "process_pending") {
+      const discountSetId = formData.get("discountSetId");
+      const BATCH_SIZE = 5; // Process 5 at a time to avoid timeout
+
+      // Fetch the discount set and master discount info
+      const discountSet = await db.discountSet.findUnique({
+        where: { id: discountSetId }
+      });
+
+      if (!discountSet) {
+        return { error: "Discount set not found" };
+      }
+
+      // Get pending discounts for this set
+      const pendingDiscounts = await db.discount.findMany({
+        where: {
+          discountSetId: discountSetId,
+          status: 'PENDING'
+        },
+        take: BATCH_SIZE
+      });
+
+      if (pendingDiscounts.length === 0) {
+        // Get final stats
+        const stats = await db.discount.groupBy({
+          by: ['status'],
+          where: { discountSetId: discountSetId },
+          _count: true
+        });
+
+        const created = stats.find(s => s.status === 'CREATED')?._count || 0;
+        const failed = stats.find(s => s.status === 'FAILED')?._count || 0;
+
+        return {
+          success: true,
+          complete: true,
+          message: `Processing complete. Created: ${created}, Failed: ${failed}`,
+          processed: 0,
+          remaining: 0
+        };
+      }
+
+      // Fetch master discount details
       const masterDiscountResponse = await admin.graphql(
         `#graphql
           query getDiscount($id: ID!) {
@@ -47,14 +153,6 @@ export const action = async ({ request }) => {
                 ... on DiscountCodeBasic {
                   title
                   status
-                  summary
-                  codes(first: 1) {
-                    edges {
-                      node {
-                        code
-                      }
-                    }
-                  }
                   minimumRequirement {
                     ... on DiscountMinimumSubtotal {
                       greaterThanOrEqualToSubtotal {
@@ -116,63 +214,23 @@ export const action = async ({ request }) => {
                   appliesOncePerCustomer
                   startsAt
                   endsAt
-                  asyncUsageCount
-                  recurringCycleLimit
                 }
               }
             }
           }`,
         {
-          variables: { id: formattedMasterDiscountId }
+          variables: { id: discountSet.masterDiscountId }
         }
       );
 
       const masterDiscountData = await masterDiscountResponse.json();
-
-      console.log('Master discount response:', JSON.stringify(masterDiscountData, null, 2));
-
-      // Better error handling
-      if (masterDiscountData.errors) {
-        console.error("GraphQL Errors:", masterDiscountData.errors);
-        return {
-          error: `GraphQL Error: ${masterDiscountData.errors[0].message}. Using ID: ${formattedMasterDiscountId}`
-        };
-      }
-
-      const masterDiscount = masterDiscountData.data.discountNode?.discount;
+      const masterDiscount = masterDiscountData.data?.discountNode?.discount;
 
       if (!masterDiscount) {
-        console.error('No master discount found:', masterDiscountData);
-        return {
-          error: `Master discount not found with ID: ${formattedMasterDiscountId}. Please check if the discount exists and the ID is correct.`
-        };
+        return { error: "Master discount no longer exists" };
       }
 
-      console.log('Master discount data:', JSON.stringify(masterDiscount, null, 2));
-      const discountSet = await db.discountSet.create({
-        data: {
-          name: discountSetName,
-          shop: session.shop,
-          masterDiscountId: formattedMasterDiscountId
-        }
-      });
-
-      // Create discount records in database first
-      const discountRecords = await Promise.all(
-        codes.map(code =>
-          db.discount.create({
-            data: {
-              shop: session.shop,
-              code: code,
-              masterDiscountId: formattedMasterDiscountId,
-              discountSetId: discountSet.id,
-              status: 'PENDING'
-            }
-          })
-        )
-      );
-
-      // Helper function to build item selection from master discount
+      // Helper functions
       const buildItemSelection = () => {
         if (masterDiscount.customerGets.items.allItems) {
           return { all: "ALL" };
@@ -186,32 +244,28 @@ export const action = async ({ request }) => {
         return { all: "ALL" };
       };
 
-      // Helper function to build customer context from master discount
       const buildCustomerContext = () => {
         if (masterDiscount.context.all) {
           return { all: "ALL" };
         } else if (masterDiscount.context.customers) {
-          // Copy customer IDs - customers field is a direct array, not a connection
           return { customers: { add: masterDiscount.context.customers.map(c => c.id) } };
         }
-        return { all: "ALL" }; // Default to all if no context specified
+        return { all: "ALL" };
       };
 
       const itemSelection = buildItemSelection();
       const customerContext = buildCustomerContext();
 
-      // Now create discounts in Shopify
-      const createdDiscounts = [];
-      for (const discountRecord of discountRecords) {
+      // Process batch
+      let processedCount = 0;
+      for (const discountRecord of pendingDiscounts) {
         try {
-          // Create discount input replicating ALL properties from master discount
-          // Only difference: unique code from CSV
           const discountInput = {
             code: discountRecord.code,
             title: masterDiscount.title,
             startsAt: masterDiscount.startsAt,
             endsAt: masterDiscount.endsAt,
-            context: customerContext, // Copy exact customer targeting from master
+            context: customerContext,
             customerGets: {
               value: masterDiscount.customerGets.value.percentage
                 ? { percentage: masterDiscount.customerGets.value.percentage }
@@ -224,11 +278,9 @@ export const action = async ({ request }) => {
               items: itemSelection
             },
             minimumRequirement: masterDiscount.minimumRequirement,
-            usageLimit: masterDiscount.usageLimit, // Copy exact usage limit from master
-            appliesOncePerCustomer: masterDiscount.appliesOncePerCustomer // Copy exact setting from master
+            usageLimit: masterDiscount.usageLimit,
+            appliesOncePerCustomer: masterDiscount.appliesOncePerCustomer
           };
-
-          console.log(`Creating discount for code ${discountRecord.code} with input:`, JSON.stringify(discountInput, null, 2));
 
           const createDiscountResponse = await admin.graphql(
             `#graphql
@@ -236,18 +288,6 @@ export const action = async ({ request }) => {
                 discountCodeBasicCreate(basicCodeDiscount: $basicCodeDiscount) {
                   codeDiscountNode {
                     id
-                    codeDiscount {
-                      ... on DiscountCodeBasic {
-                        title
-                        codes(first: 1) {
-                          edges {
-                            node {
-                              code
-                            }
-                          }
-                        }
-                      }
-                    }
                   }
                   userErrors {
                     field
@@ -256,21 +296,16 @@ export const action = async ({ request }) => {
                 }
               }`,
             {
-              variables: {
-                basicCodeDiscount: discountInput
-              }
+              variables: { basicCodeDiscount: discountInput }
             }
           );
 
           const createResult = await createDiscountResponse.json();
-
-          // Handle discount creation result
           const userErrors = createResult.data?.discountCodeBasicCreate?.userErrors;
           const codeDiscountNode = createResult.data?.discountCodeBasicCreate?.codeDiscountNode;
 
           if (userErrors?.length > 0) {
             const errorMsg = userErrors.map(e => `${e.field}: ${e.message}`).join(', ');
-            console.error(`Failed: ${discountRecord.code} - ${errorMsg}`);
             await db.discount.update({
               where: { id: discountRecord.id },
               data: { status: 'FAILED', errorMessage: errorMsg }
@@ -280,28 +315,69 @@ export const action = async ({ request }) => {
               where: { id: discountRecord.id },
               data: { status: 'CREATED', shopifyId: codeDiscountNode.id }
             });
-            createdDiscounts.push({ code: discountRecord.code, shopifyId: codeDiscountNode.id });
           } else {
-            const errorMsg = 'Unexpected API response structure';
-            console.error(`${errorMsg} for ${discountRecord.code}`);
             await db.discount.update({
               where: { id: discountRecord.id },
-              data: { status: 'FAILED', errorMessage: errorMsg }
+              data: { status: 'FAILED', errorMessage: 'Unexpected API response' }
             });
           }
+          processedCount++;
         } catch (error) {
           console.error(`Error creating ${discountRecord.code}:`, error.message);
           await db.discount.update({
             where: { id: discountRecord.id },
             data: { status: 'FAILED', errorMessage: error.message || 'Unknown error' }
           });
+          processedCount++;
         }
       }
 
+      // Get remaining count
+      const remainingCount = await db.discount.count({
+        where: {
+          discountSetId: discountSetId,
+          status: 'PENDING'
+        }
+      });
+
       return {
         success: true,
-        message: `Created ${createdDiscounts.length} out of ${codes.length} discounts successfully`,
-        createdDiscounts
+        complete: remainingCount === 0,
+        processed: processedCount,
+        remaining: remainingCount,
+        message: remainingCount > 0
+          ? `Processed ${processedCount} discounts. ${remainingCount} remaining...`
+          : `Batch complete. Processed ${processedCount} discounts.`
+      };
+    }
+
+    // Retry failed discounts
+    if (action === "retry_failed") {
+      const discountSetId = formData.get("discountSetId");
+
+      await db.discount.updateMany({
+        where: {
+          discountSetId: discountSetId,
+          status: 'FAILED'
+        },
+        data: {
+          status: 'PENDING',
+          errorMessage: null
+        }
+      });
+
+      const pendingCount = await db.discount.count({
+        where: {
+          discountSetId: discountSetId,
+          status: 'PENDING'
+        }
+      });
+
+      return {
+        success: true,
+        message: `${pendingCount} failed discounts have been queued for retry.`,
+        discountSetId: discountSetId,
+        needsProcessing: pendingCount > 0
       };
     }
 
@@ -401,8 +477,11 @@ export const action = async ({ request }) => {
 
 export default function BulkDiscount() {
   const fetcher = useFetcher();
+  const processFetcher = useFetcher();
   const loaderData = useLoaderData();
+  const revalidator = useRevalidator();
   const actionData = fetcher.data;
+  const processData = processFetcher.data;
 
   // Use initial data from loader, not action data for discount sets
   const { discountSets } = loaderData;
@@ -412,6 +491,56 @@ export default function BulkDiscount() {
   const [csvContent, setCsvContent] = useState("");
   const [parsedCodes, setParsedCodes] = useState([]);
   const [showPreview, setShowPreview] = useState(false);
+
+  // Processing state
+  const [processingSetId, setProcessingSetId] = useState(null);
+  const [processedCount, setProcessedCount] = useState(0);
+  const [totalToProcess, setTotalToProcess] = useState(0);
+  const [processingMessage, setProcessingMessage] = useState("");
+
+  // Start processing when we receive a needsProcessing response
+  useEffect(() => {
+    if (actionData?.needsProcessing && actionData?.discountSetId) {
+      setProcessingSetId(actionData.discountSetId);
+      setTotalToProcess(actionData.totalCodes || 0);
+      setProcessedCount(0);
+      setProcessingMessage("Starting processing...");
+    }
+  }, [actionData]);
+
+  // Polling loop for processing pending discounts
+  useEffect(() => {
+    if (!processingSetId) return;
+    if (processFetcher.state === "submitting" || processFetcher.state === "loading") return;
+
+    // Check if processing is complete
+    if (processData?.complete) {
+      setProcessingMessage(processData.message);
+      setProcessingSetId(null);
+      // Refresh the data to show updated statuses
+      revalidator.revalidate();
+      return;
+    }
+
+    // Update progress
+    if (processData?.processed) {
+      setProcessedCount(prev => prev + processData.processed);
+      setProcessingMessage(processData.message);
+    }
+
+    // Continue processing
+    const timer = setTimeout(() => {
+      processFetcher.submit(
+        {
+          action: "process_pending",
+          discountSetId: processingSetId
+        },
+        { method: "POST" }
+      );
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [processingSetId, processData, processFetcher.state]);
 
   const handleCsvChange = (event) => {
     const file = event.target.files[0];
@@ -482,20 +611,59 @@ export default function BulkDiscount() {
     }
   };
 
+  const handleRetryFailed = (discountSetId) => {
+    fetcher.submit(
+      {
+        action: "retry_failed",
+        discountSetId
+      },
+      { method: "POST" }
+    );
+  };
+
+  const handleResumeProcessing = (discountSetId) => {
+    // Count pending for this set
+    const set = discountSets.find(s => s.id === discountSetId);
+    const pendingCount = set?.discounts.filter(d => d.status === 'PENDING').length || 0;
+    if (pendingCount > 0) {
+      setProcessingSetId(discountSetId);
+      setTotalToProcess(pendingCount);
+      setProcessedCount(0);
+      setProcessingMessage("Resuming processing...");
+    }
+  };
+
   const isLoading = fetcher.state === "submitting";
+  const isProcessing = !!processingSetId;
 
   return (
     <s-page heading="Bulk Discount Management">
 
-{actionData?.error && (
+      {actionData?.error && (
         <s-banner status="critical">
           {actionData.error}
         </s-banner>
       )}
 
-      {actionData?.success && (
+      {actionData?.success && !processingSetId && (
         <s-banner status="success">
           {actionData.message}
+        </s-banner>
+      )}
+
+      {isProcessing && (
+        <s-banner status="info">
+          <s-stack direction="block" gap="tight">
+            <s-text>
+              {processingMessage}
+            </s-text>
+            <s-text size="small" color="subdued">
+              Processed: {processedCount} {totalToProcess > 0 && `of ~${totalToProcess}`}
+            </s-text>
+            <s-progress-bar
+              progress={totalToProcess > 0 ? Math.min((processedCount / totalToProcess) * 100, 100) : 0}
+            />
+          </s-stack>
         </s-banner>
       )}
 
@@ -577,26 +745,55 @@ export default function BulkDiscount() {
           </s-empty-state>
         ) : (
           <s-stack direction="block" gap="large">
-            {discountSets.map((discountSet) => (
+            {discountSets.map((discountSet) => {
+              const pendingCount = discountSet.discounts.filter(d => d.status === 'PENDING').length;
+              const failedCount = discountSet.discounts.filter(d => d.status === 'FAILED').length;
+              const createdCount = discountSet.discounts.filter(d => d.status === 'CREATED').length;
+              const isCurrentlyProcessing = processingSetId === discountSet.id;
+
+              return (
               <s-card key={discountSet.id}>
                 <s-stack direction="block" gap="base">
                   <s-stack direction="inline" gap="base">
                     <s-heading size="small">{discountSet.name}</s-heading>
-                    <s-badge>
-                      {discountSet.discounts.length} discount{discountSet.discounts.length !== 1 ? 's' : ''}
-                    </s-badge>
-                    <s-button
-                      onClick={() => handleDeleteDiscountSet(discountSet.id)}
-                      variant="secondary"
-                      size="small"
-                    >
-                      Delete Set
-                    </s-button>
+                    <s-badge variant="success">{createdCount} created</s-badge>
+                    {pendingCount > 0 && <s-badge variant="attention">{pendingCount} pending</s-badge>}
+                    {failedCount > 0 && <s-badge variant="critical">{failedCount} failed</s-badge>}
                   </s-stack>
 
                   <s-text size="small" color="subdued">
                     Created: {new Date(discountSet.createdAt).toLocaleDateString()}
                   </s-text>
+
+                  <s-stack direction="inline" gap="base">
+                    {pendingCount > 0 && !isCurrentlyProcessing && (
+                      <s-button
+                        onClick={() => handleResumeProcessing(discountSet.id)}
+                        variant="primary"
+                        size="small"
+                      >
+                        Resume Processing ({pendingCount} pending)
+                      </s-button>
+                    )}
+                    {failedCount > 0 && !isCurrentlyProcessing && (
+                      <s-button
+                        onClick={() => handleRetryFailed(discountSet.id)}
+                        variant="secondary"
+                        size="small"
+                        disabled={isLoading}
+                      >
+                        Retry Failed ({failedCount})
+                      </s-button>
+                    )}
+                    <s-button
+                      onClick={() => handleDeleteDiscountSet(discountSet.id)}
+                      variant="secondary"
+                      size="small"
+                      disabled={isCurrentlyProcessing}
+                    >
+                      Delete Set
+                    </s-button>
+                  </s-stack>
 
                   {discountSet.discounts.length > 0 && (
                     <s-table>
@@ -656,7 +853,8 @@ export default function BulkDiscount() {
                   )}
                 </s-stack>
               </s-card>
-            ))}
+              );
+            })}
           </s-stack>
         )}
       </s-section>
