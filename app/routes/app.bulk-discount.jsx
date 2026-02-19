@@ -498,6 +498,11 @@ export default function BulkDiscount() {
   const [totalToProcess, setTotalToProcess] = useState(0);
   const [processingMessage, setProcessingMessage] = useState("");
 
+  // Detail view state - tracks which discount set is expanded and pagination
+  const [expandedSetId, setExpandedSetId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 20;
+
   // Start processing when we receive a needsProcessing response
   useEffect(() => {
     if (actionData?.needsProcessing && actionData?.discountSetId) {
@@ -793,9 +798,128 @@ export default function BulkDiscount() {
                     >
                       Delete Set
                     </s-button>
+                    <s-button
+                      onClick={() => {
+                        if (expandedSetId === discountSet.id) {
+                          setExpandedSetId(null);
+                        } else {
+                          setExpandedSetId(discountSet.id);
+                          setCurrentPage(1);
+                        }
+                      }}
+                      variant="secondary"
+                      size="small"
+                    >
+                      {expandedSetId === discountSet.id ? 'Hide Details' : `View All (${discountSet.discounts.length})`}
+                    </s-button>
                   </s-stack>
 
-                  {discountSet.discounts.length > 0 && (
+                  {expandedSetId === discountSet.id && discountSet.discounts.length > 0 && (() => {
+                    const totalPages = Math.ceil(discountSet.discounts.length / ITEMS_PER_PAGE);
+                    const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
+                    const endIdx = startIdx + ITEMS_PER_PAGE;
+                    const paginatedDiscounts = discountSet.discounts.slice(startIdx, endIdx);
+
+                    return (
+                      <s-stack direction="block" gap="base">
+                        <s-stack direction="inline" gap="base" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                          <s-text size="small" color="subdued">
+                            Showing {startIdx + 1}-{Math.min(endIdx, discountSet.discounts.length)} of {discountSet.discounts.length} discounts
+                          </s-text>
+                          <s-stack direction="inline" gap="tight">
+                            <s-button
+                              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                              variant="secondary"
+                              size="small"
+                              disabled={currentPage === 1}
+                            >
+                              Previous
+                            </s-button>
+                            <s-text size="small">Page {currentPage} of {totalPages}</s-text>
+                            <s-button
+                              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                              variant="secondary"
+                              size="small"
+                              disabled={currentPage === totalPages}
+                            >
+                              Next
+                            </s-button>
+                          </s-stack>
+                        </s-stack>
+                        <s-table>
+                          <s-table-head>
+                            <s-table-row>
+                              <s-table-cell>Code</s-table-cell>
+                              <s-table-cell>Status</s-table-cell>
+                              <s-table-cell>Created</s-table-cell>
+                              <s-table-cell>Error</s-table-cell>
+                              <s-table-cell>Actions</s-table-cell>
+                            </s-table-row>
+                          </s-table-head>
+                          <s-table-body>
+                            {paginatedDiscounts.map((discount) => (
+                              <s-table-row key={discount.id}>
+                                <s-table-cell>{discount.code}</s-table-cell>
+                                <s-table-cell>
+                                  <s-badge variant={
+                                    discount.status === 'CREATED' ? 'success' :
+                                    discount.status === 'FAILED' ? 'critical' :
+                                    'attention'
+                                  }>
+                                    {discount.status}
+                                  </s-badge>
+                                </s-table-cell>
+                                <s-table-cell>
+                                  {new Date(discount.createdAt).toLocaleDateString()}
+                                </s-table-cell>
+                                <s-table-cell>
+                                  {discount.status === 'FAILED' && discount.errorMessage ? (
+                                    <s-text size="small" color="critical">
+                                      {discount.errorMessage}
+                                    </s-text>
+                                  ) : (
+                                    <s-text size="small" color="subdued">-</s-text>
+                                  )}
+                                </s-table-cell>
+                                <s-table-cell>
+                                  <s-button
+                                    onClick={() => handleDeleteSingleDiscount(discount.id)}
+                                    variant="secondary"
+                                    size="small"
+                                  >
+                                    Delete
+                                  </s-button>
+                                </s-table-cell>
+                              </s-table-row>
+                            ))}
+                          </s-table-body>
+                        </s-table>
+                        {totalPages > 1 && (
+                          <s-stack direction="inline" gap="tight" style={{ justifyContent: 'center' }}>
+                            <s-button
+                              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                              variant="secondary"
+                              size="small"
+                              disabled={currentPage === 1}
+                            >
+                              Previous
+                            </s-button>
+                            <s-text size="small">Page {currentPage} of {totalPages}</s-text>
+                            <s-button
+                              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                              variant="secondary"
+                              size="small"
+                              disabled={currentPage === totalPages}
+                            >
+                              Next
+                            </s-button>
+                          </s-stack>
+                        )}
+                      </s-stack>
+                    );
+                  })()}
+
+                  {expandedSetId !== discountSet.id && discountSet.discounts.length > 0 && (
                     <s-table>
                       <s-table-head>
                         <s-table-row>
@@ -807,7 +931,7 @@ export default function BulkDiscount() {
                         </s-table-row>
                       </s-table-head>
                       <s-table-body>
-                        {discountSet.discounts.slice(0, 10).map((discount) => (
+                        {discountSet.discounts.slice(0, 5).map((discount) => (
                           <s-table-row key={discount.id}>
                             <s-table-cell>{discount.code}</s-table-cell>
                             <s-table-cell>
@@ -846,10 +970,17 @@ export default function BulkDiscount() {
                     </s-table>
                   )}
 
-                  {discountSet.discounts.length > 10 && (
-                    <s-text size="small" color="subdued">
-                      ... and {discountSet.discounts.length - 10} more discounts
-                    </s-text>
+                  {expandedSetId !== discountSet.id && discountSet.discounts.length > 5 && (
+                    <s-button
+                      onClick={() => {
+                        setExpandedSetId(discountSet.id);
+                        setCurrentPage(1);
+                      }}
+                      variant="secondary"
+                      size="small"
+                    >
+                      View all {discountSet.discounts.length} discounts
+                    </s-button>
                   )}
                 </s-stack>
               </s-card>
