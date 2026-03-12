@@ -18,6 +18,7 @@ export default function App() {
       <s-app-nav>
         <s-link href="/app">Home</s-link>
         <s-link href="/app/bulk-discount">Bulk Discount</s-link>
+        <s-link href="/app/bulk-customer-export">Customer Export</s-link>
       </s-app-nav>
       <Outlet />
     </AppProvider>
