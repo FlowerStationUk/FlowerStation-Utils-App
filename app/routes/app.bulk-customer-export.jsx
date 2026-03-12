@@ -473,9 +473,7 @@ export default function BulkCustomerExport() {
           <strong>Included fields:</strong> First Name, Last Name, Email, Email Marketing Status, Total Spent, Total Orders, Company, Address, City, Province, Country, Zip, Phone, Note, Tax Exempt, Tags
         </s-paragraph>
 
-        <s-spacer size="large" />
-
-        <s-button-group>
+        <s-stack direction="inline" gap="base" style={{ marginTop: "16px" }}>
           <s-button
             variant="primary"
             onClick={handleStartExport}
@@ -489,13 +487,12 @@ export default function BulkCustomerExport() {
               Download CSV
             </s-button>
           )}
-        </s-button-group>
+        </s-stack>
 
         {isProcessing && (
-          <s-paragraph size="small" color="subdued">
-            <s-spacer size="small" />
+          <s-text size="small" color="subdued" style={{ display: "block", marginTop: "12px" }}>
             Please keep this page open until the export completes. This may take several minutes for large stores.
-          </s-paragraph>
+          </s-text>
         )}
       </s-section>
     </s-page>
