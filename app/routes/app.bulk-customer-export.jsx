@@ -3,8 +3,42 @@ import { useFetcher } from "react-router";
 import { authenticate } from "../shopify.server";
 
 export const loader = async ({ request }) => {
-  await authenticate.admin(request);
-  return {};
+  const { admin } = await authenticate.admin(request);
+
+  try {
+    const currentOperationQuery = `
+      query {
+        currentBulkOperation {
+          id
+          status
+          objectCount
+          fileSize
+          url
+          partialDataUrl
+        }
+      }
+    `;
+
+    const response = await admin.graphql(currentOperationQuery);
+    const data = await response.json();
+
+    const currentOperation = data.data?.currentBulkOperation;
+
+    if (currentOperation && (currentOperation.status === "RUNNING" || currentOperation.status === "CREATED")) {
+      return {
+        existingOperation: {
+          id: currentOperation.id,
+          status: currentOperation.status,
+          objectCount: currentOperation.objectCount || 0
+        }
+      };
+    }
+
+    return { existingOperation: null };
+  } catch (error) {
+    console.error("Loader error:", error);
+    return { existingOperation: null };
+  }
 };
 
 export const action = async ({ request }) => {
@@ -13,7 +47,62 @@ export const action = async ({ request }) => {
   const action = formData.get("action");
 
   try {
+    if (action === "check_current") {
+      const currentOperationQuery = `
+        query {
+          currentBulkOperation {
+            id
+            status
+            objectCount
+            fileSize
+            url
+            partialDataUrl
+          }
+        }
+      `;
+
+      const response = await admin.graphql(currentOperationQuery);
+      const data = await response.json();
+
+      const currentOperation = data.data?.currentBulkOperation;
+
+      if (!currentOperation) {
+        return { success: true, hasOperation: false };
+      }
+
+      return {
+        success: true,
+        hasOperation: true,
+        operationId: currentOperation.id,
+        status: currentOperation.status,
+        objectCount: currentOperation.objectCount || 0,
+        url: currentOperation.url,
+        partialDataUrl: currentOperation.partialDataUrl
+      };
+    }
+
     if (action === "start_export") {
+      const currentOperationQuery = `
+        query {
+          currentBulkOperation {
+            id
+            status
+          }
+        }
+      `;
+
+      const currentOpResponse = await admin.graphql(currentOperationQuery);
+      const currentOpData = await currentOpResponse.json();
+
+      const currentOp = currentOpData.data?.currentBulkOperation;
+
+      if (currentOp && (currentOp.status === "RUNNING" || currentOp.status === "CREATED")) {
+        return {
+          error: "A bulk operation is already running. Please wait for it to complete or cancel it from the Shopify admin.",
+          existingOperationId: currentOp.id
+        };
+      }
+
       const bulkOperationQuery = `
         mutation {
           bulkOperationRunQuery(
@@ -70,15 +159,17 @@ export const action = async ({ request }) => {
       const data = await response.json();
 
       if (data.data?.bulkOperationRunQuery?.userErrors?.length > 0) {
+        const errorMsg = data.data.bulkOperationRunQuery.userErrors[0].message;
         return {
-          error: data.data.bulkOperationRunQuery.userErrors[0].message
+          error: errorMsg
         };
       }
 
       return {
         success: true,
         operationId: data.data.bulkOperationRunQuery.bulkOperation.id,
-        status: data.data.bulkOperationRunQuery.bulkOperation.status
+        status: data.data.bulkOperationRunQuery.bulkOperation.status,
+        message: "Export started successfully"
       };
     }
 
@@ -230,50 +321,74 @@ export default function BulkCustomerExport() {
   const [csvData, setCsvData] = useState(null);
   const [recordCount, setRecordCount] = useState(0);
   const [error, setError] = useState(null);
+  const [isPolling, setIsPolling] = useState(false);
 
   useEffect(() => {
-    if (fetcher.data?.success && fetcher.data.operationId) {
-      setOperationId(fetcher.data.operationId);
-      setStatus(fetcher.data.status);
-      setError(null);
-    }
-
-    if (fetcher.data?.error) {
-      setError(fetcher.data.error);
-      setStatus("error");
-    }
-
-    if (fetcher.data?.status) {
-      setStatus(fetcher.data.status);
-      setObjectCount(fetcher.data.objectCount || 0);
-
-      if (fetcher.data.status === "COMPLETED" && fetcher.data.url) {
-        fetcher.submit(
-          { action: "download_and_convert", url: fetcher.data.url },
-          { method: "post" }
-        );
+    if (fetcher.data) {
+      if (fetcher.data.existingOperation) {
+        const existing = fetcher.data.existingOperation;
+        setOperationId(existing.id);
+        setStatus(existing.status);
+        setObjectCount(existing.objectCount || 0);
+        setIsPolling(true);
       }
-    }
 
-    if (fetcher.data?.csvData) {
-      setCsvData(fetcher.data.csvData);
-      setRecordCount(fetcher.data.recordCount);
-      setStatus("ready");
+      if (fetcher.data.success && fetcher.data.operationId) {
+        setOperationId(fetcher.data.operationId);
+        setStatus(fetcher.data.status);
+        setError(null);
+        setIsPolling(true);
+      }
+
+      if (fetcher.data.error) {
+        setError(fetcher.data.error);
+        setStatus("error");
+        setIsPolling(false);
+      }
+
+      if (fetcher.data.hasOperation !== undefined) {
+        if (fetcher.data.hasOperation) {
+          setOperationId(fetcher.data.operationId);
+          setStatus(fetcher.data.status);
+          setObjectCount(fetcher.data.objectCount || 0);
+
+          if (fetcher.data.status === "COMPLETED" && fetcher.data.url) {
+            setIsPolling(false);
+            fetcher.submit(
+              { action: "download_and_convert", url: fetcher.data.url },
+              { method: "post" }
+            );
+          } else if (fetcher.data.status === "RUNNING" || fetcher.data.status === "CREATED") {
+            setIsPolling(true);
+          } else {
+            setIsPolling(false);
+          }
+        } else {
+          setIsPolling(false);
+        }
+      }
+
+      if (fetcher.data.csvData) {
+        setCsvData(fetcher.data.csvData);
+        setRecordCount(fetcher.data.recordCount);
+        setStatus("ready");
+        setIsPolling(false);
+      }
     }
   }, [fetcher.data, fetcher]);
 
   useEffect(() => {
-    if (operationId && status === "RUNNING") {
+    if (isPolling && operationId && (status === "RUNNING" || status === "CREATED")) {
       const interval = setInterval(() => {
         fetcher.submit(
-          { action: "check_status", operationId },
+          { action: "check_current" },
           { method: "post" }
         );
-      }, 3000);
+      }, 2000);
 
       return () => clearInterval(interval);
     }
-  }, [operationId, status, fetcher]);
+  }, [isPolling, operationId, status, fetcher]);
 
   const handleStartExport = () => {
     setOperationId(null);
@@ -282,6 +397,7 @@ export default function BulkCustomerExport() {
     setCsvData(null);
     setRecordCount(0);
     setError(null);
+    setIsPolling(false);
 
     fetcher.submit({ action: "start_export" }, { method: "post" });
   };
@@ -302,75 +418,87 @@ export default function BulkCustomerExport() {
     document.body.removeChild(link);
   };
 
-  const isProcessing = status === "RUNNING" || status === "starting";
+  const isProcessing = status === "RUNNING" || status === "CREATED" || status === "starting";
   const isCompleted = status === "ready";
-  const progressPercentage = objectCount > 0 ? Math.min(100, (objectCount / 1000) * 100) : 0;
+  const canStartExport = status === "idle" || status === "ready" || status === "error";
 
   return (
-    <s-block>
-      <s-card padding="400">
-        <s-block-stack gap="400">
-          <s-text variant="headingLg">Bulk Customer Export</s-text>
+    <s-page heading="Bulk Customer Export">
+      {error && (
+        <s-banner status="critical">
+          <s-stack direction="block" gap="tight">
+            <s-text size="bold">Error</s-text>
+            <s-text>{error}</s-text>
+          </s-stack>
+        </s-banner>
+      )}
 
-          <s-text variant="bodyMd">
-            Export all customer data using Shopify&apos;s Bulk Operations API. This includes basic info, marketing status, statistics, addresses, and metadata.
-          </s-text>
+      {isProcessing && (
+        <s-banner status="info">
+          <s-stack direction="block" gap="tight">
+            <s-text>
+              {status === "starting" || status === "CREATED"
+                ? "Initializing export operation..."
+                : "Exporting customer data..."}
+            </s-text>
+            {objectCount > 0 && (
+              <>
+                <s-text size="small" color="subdued">
+                  Progress: {objectCount.toLocaleString()} customers
+                </s-text>
+                <s-progress-bar progress={50} />
+              </>
+            )}
+          </s-stack>
+        </s-banner>
+      )}
 
-          {error && (
-            <s-banner status="critical">
-              <s-text>{error}</s-text>
-            </s-banner>
-          )}
+      {isCompleted && (
+        <s-banner status="success">
+          <s-stack direction="block" gap="tight">
+            <s-text size="bold">Export Complete</s-text>
+            <s-text>
+              Successfully exported {recordCount.toLocaleString()} customers. Click the download button below to save your CSV file.
+            </s-text>
+          </s-stack>
+        </s-banner>
+      )}
 
-          {isProcessing && (
-            <s-block-stack gap="200">
-              <s-text variant="bodyMd">
-                {status === "starting" ? "Starting export operation..." : "Exporting customer data..."}
-              </s-text>
+      <s-section heading="Export Customer Data">
+        <s-paragraph>
+          Export all customer data using Shopify&apos;s Bulk Operations API. This includes basic information, marketing consent, order statistics, addresses, tags, and notes.
+        </s-paragraph>
 
-              {objectCount > 0 && (
-                <s-block-stack gap="100">
-                  <s-text variant="bodySm">
-                    Processing {objectCount.toLocaleString()} customers
-                  </s-text>
-                  <div style={{ width: '100%', height: '8px', backgroundColor: '#e4e5e7', borderRadius: '4px', overflow: 'hidden' }}>
-                    <div style={{
-                      width: `${progressPercentage}%`,
-                      height: '100%',
-                      backgroundColor: '#008060',
-                      transition: 'width 0.3s ease'
-                    }} />
-                  </div>
-                </s-block-stack>
-              )}
+        <s-paragraph color="subdued" size="small">
+          <strong>Included fields:</strong> First Name, Last Name, Email, Email Marketing Status, Total Spent, Total Orders, Company, Address, City, Province, Country, Zip, Phone, Note, Tax Exempt, Tags
+        </s-paragraph>
 
-              <s-spinner size="small" />
-            </s-block-stack>
-          )}
+        <s-spacer size="large" />
+
+        <s-button-group>
+          <s-button
+            variant="primary"
+            onClick={handleStartExport}
+            disabled={!canStartExport || fetcher.state === "submitting"}
+          >
+            {isProcessing ? "Exporting..." : "Start Export"}
+          </s-button>
 
           {isCompleted && (
-            <s-banner status="success">
-              <s-text>Export completed! {recordCount.toLocaleString()} customers ready to download.</s-text>
-            </s-banner>
-          )}
-
-          <s-inline-stack gap="200">
-            <s-button
-              variant="primary"
-              onClick={handleStartExport}
-              disabled={isProcessing}
-            >
-              {isProcessing ? "Exporting..." : "Start Export"}
+            <s-button onClick={handleDownload}>
+              Download CSV
             </s-button>
+          )}
+        </s-button-group>
 
-            {isCompleted && (
-              <s-button onClick={handleDownload}>
-                Download CSV
-              </s-button>
-            )}
-          </s-inline-stack>
-        </s-block-stack>
-      </s-card>
-    </s-block>
+        {isProcessing && (
+          <s-paragraph size="small" color="subdued">
+            <s-spacer size="small" />
+            Please keep this page open until the export completes. This may take several minutes for large stores.
+          </s-paragraph>
+        )}
+      </s-section>
+    </s-page>
   );
 }
+
