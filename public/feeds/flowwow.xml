@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<yml_catalog date="2026-06-15 14:31">
+  <shop>
+    <offers>
+      <offer id="11111">
+        <name>Test Product A</name>
+        <price>10.00</price>
+        <picture>https://example.com/a.jpg</picture>
+        <description>Description of A</description>
+        <qty>5</qty>
+        <consist name="Roses, Gypsophila"/>
+      </offer>
+      <offer id="22222">
+        <name>Test Product B - Red</name>
+        <price>15.00</price>
+        <picture>https://example.com/b_variant.jpg</picture>
+        <description>Description of B</description>
+        <qty>10</qty>
+        <consist name="Flowers"/>
+      </offer>
+      <offer id="33333">
+        <name>Test Product C - Large</name>
+        <price>25.00</price>
+        <picture></picture>
+        <description>Description of C</description>
+        <qty>2</qty>
+        <consist name="Lilies"/>
+      </offer>
+    </offers>
+  </shop>
+</yml_catalog>
