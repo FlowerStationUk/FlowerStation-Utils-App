@@ -22,7 +22,7 @@ export const loader = async () => {
     lastUpdated = "Not generated yet";
   }
   
-  const appUrl = process.env.SHOPIFY_APP_URL || "";
+  const appUrl = (process.env.SHOPIFY_APP_URL || "").replace(/\/$/, "");
   const feedUrl = `${appUrl}/api/feeds/flowwow`;
   
   return { feedUrl, lastUpdated };
@@ -54,6 +54,25 @@ export default function ProductFeed() {
   const handleGenerate = () => {
     setGenerating(true);
     fetcher.submit({ action: "generate" }, { method: "post" });
+  };
+  
+  const handleDownload = async () => {
+    try {
+      const response = await fetch("/api/feeds/flowwow");
+      if (!response.ok) {
+        alert("Feed not generated yet. Please sync first.");
+        return;
+      }
+      const blob = await response.blob();
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "flowwow.xml";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error(error);
+    }
   };
   
   useEffect(() => {
@@ -89,6 +108,9 @@ export default function ProductFeed() {
           <s-stack direction="inline" gap="base" style={{ marginTop: "12px" }}>
             <s-button variant="primary" onClick={handleGenerate} disabled={generating}>
               {generating ? "Starting Sync..." : "Sync Feed Now"}
+            </s-button>
+            <s-button onClick={handleDownload} disabled={lastUpdated === "Not generated yet"}>
+              Download XML
             </s-button>
           </s-stack>
         </s-stack>
