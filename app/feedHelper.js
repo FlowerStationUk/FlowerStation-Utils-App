@@ -91,9 +91,6 @@ export function parseComposition(metafieldValue, typeValue) {
     }
   }
   
-  if (items.length === 0) {
-    return [{ name: "Flowers", qty: 1 }];
-  }
   return items;
 }
 
@@ -157,7 +154,17 @@ export function buildXmlFeed(variants, shopInfo) {
     const isNonFloral = ["plant", "bear", "vase", "balloon", "chocolate", "jewellery", "jewelry", "gift card"].some(
       (kw) => lowerType.includes(kw)
     );
-    const shouldOmitQty = !isNonFloral;
+    const floralConsistNames = new Set([
+      "flowers", "rose", "hydrangea", "chrysanthemum", "lily", "tulip",
+      "orchid", "dahlia", "sunflower", "peony", "lavender", "carnation",
+      "gerbera", "snapdragon", "delphinium", "stock", "lisianthus",
+      "bouvardia", "hypericum", "eucalyptus", "waxflower", "alstroemeria",
+      "freesia", "anthurium", "eustoma"
+    ]);
+    const hasFloralConsist = consistItems.some(
+      (item) => floralConsistNames.has(item.name.toLowerCase())
+    );
+    const shouldOmitQty = !isNonFloral || hasFloralConsist;
 
     const parsedQty = Math.max(0, parseInt(variant.inventoryQuantity ?? 0, 10));
     const isAvailable = shouldOmitQty || parsedQty > 0;
