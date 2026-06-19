@@ -58,7 +58,7 @@ export default function ProductFeed() {
   
   const handleDownload = async () => {
     try {
-      const response = await fetch("/api/feeds/flowwow");
+      const response = await fetch(feedUrl);
       if (!response.ok) {
         alert("Feed not generated yet. Please sync first.");
         return;
