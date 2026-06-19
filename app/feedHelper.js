@@ -154,9 +154,10 @@ export function buildXmlFeed(variants, shopInfo) {
     const consistItems = parseComposition(consistMetafield, typeMetafield);
 
     const lowerType = rawType.toLowerCase();
-    const isFlowersOrEdible = lowerType.includes("flower") || lowerType.includes("bouquet");
-    const hasFlowersConsist = consistItems.some((item) => item.name.toLowerCase() === "flowers");
-    const shouldOmitQty = isFlowersOrEdible || hasFlowersConsist;
+    const isNonFloral = ["plant", "bear", "vase", "balloon", "chocolate", "jewellery", "jewelry", "gift card"].some(
+      (kw) => lowerType.includes(kw)
+    );
+    const shouldOmitQty = !isNonFloral;
 
     const parsedQty = Math.max(0, parseInt(variant.inventoryQuantity ?? 0, 10));
     const isAvailable = shouldOmitQty || parsedQty > 0;
