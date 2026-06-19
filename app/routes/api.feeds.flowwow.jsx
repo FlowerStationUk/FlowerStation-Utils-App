@@ -15,7 +15,7 @@ export const loader = async () => {
       status: 200,
       headers: {
         [contentTypeKey]: "text/xml",
-        [cacheControlKey]: `public, ${maxAgeVal}`
+        [cacheControlKey]: `public, ${maxAgeVal}, must-revalidate`
       }
     });
   } catch (error) {
