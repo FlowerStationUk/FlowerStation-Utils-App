@@ -86,6 +86,7 @@ async function run() {
             id
             title
             price
+            compareAtPrice
             inventoryQuantity
             image {
               url

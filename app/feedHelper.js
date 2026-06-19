@@ -1,3 +1,7 @@
+export function stripHtml(html) {
+  return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
 export function escapeXml(value) {
   if (value === null || value === undefined) {
     return "";
@@ -123,47 +127,53 @@ export function buildXmlFeed(variants, shopInfo) {
       name = `${productTitle} ${dash} ${variantTitle}`;
     }
     
-    const price = variant.price || "0.00";
+    const priceRaw = Math.round(parseFloat(variant.price || "0") || 0);
+    const compareAtRaw = Math.round(parseFloat(variant.compareAtPrice || "0") || 0);
+    const oldPrice = compareAtRaw > priceRaw ? compareAtRaw : priceRaw;
     const picture = variant.image?.url || variant.product?.featuredImage?.url || "";
-    const description = variant.product?.description || variant.product?.descriptionHtml || "";
-    
+    const rawDesc = variant.product?.description || "";
+    const description = rawDesc || stripHtml(variant.product?.descriptionHtml || "");
+
     const rawType = variant.product?.productType || "Bouquets";
     const categoryId = shopInfo.categoriesMap.get(rawType.trim()) || 1;
-    
+
     const productHandle = variant.product?.handle || "";
     const productUrl = productHandle ? `${shopInfo.url}/products/${productHandle}` : "";
-    
-    if (!variantId || !productUrl || !name || !price || parseFloat(price) <= 0 || !picture) {
+
+    if (!variantId || !productUrl || !name || priceRaw <= 0 || !picture) {
       continue;
     }
-    
+
     let finalDesc = description.trim();
     if (!finalDesc) {
       finalDesc = name;
     }
-    
+
     const consistMetafield = variant.product?.composition?.value;
     const typeMetafield = variant.product?.type?.value;
     const consistItems = parseComposition(consistMetafield, typeMetafield);
-    
-    xml += `      <offer id="${escapeXml(variantId)}" available="true">\n`;
-    xml += `        <url>${escapeXml(productUrl)}</url>\n`;
-    xml += `        <name>${escapeXml(name)}</name>\n`;
-    xml += `        <categoryId>${categoryId}</categoryId>\n`;
-    xml += `        <picture>${escapeXml(picture)}</picture>\n`;
-    xml += `        <price>${escapeXml(price)}</price>\n`;
-    xml += `        <currencyId>${escapeXml(shopInfo.currencyCode)}</currencyId>\n`;
-    xml += `        <description>${escapeXml(finalDesc)}</description>\n`;
-    xml += '        <param name="width, mm">350</param>\n';
-    xml += '        <param name="height, mm">400</param>\n';
-    
+
     const lowerType = rawType.toLowerCase();
     const isFlowersOrEdible = lowerType.includes("flower") || lowerType.includes("bouquet");
     const hasFlowersConsist = consistItems.some((item) => item.name.toLowerCase() === "flowers");
     const shouldOmitQty = isFlowersOrEdible || hasFlowersConsist;
-    
-    if (!shouldOmitQty) {
-      const parsedQty = Math.max(0, parseInt(variant.inventoryQuantity ?? 0, 10));
+
+    const parsedQty = Math.max(0, parseInt(variant.inventoryQuantity ?? 0, 10));
+    const isAvailable = shouldOmitQty || parsedQty > 0;
+
+    xml += `      <offer id="${escapeXml(variantId)}" available="${isAvailable ? "true" : "false"}">\n`;
+    xml += `        <url>${escapeXml(productUrl)}</url>\n`;
+    xml += `        <name>${escapeXml(name)}</name>\n`;
+    xml += `        <categoryId>${categoryId}</categoryId>\n`;
+    xml += `        <picture>${escapeXml(picture)}</picture>\n`;
+    xml += `        <price>${priceRaw}</price>\n`;
+    xml += `        <oldprice>${oldPrice}</oldprice>\n`;
+    xml += `        <currencyId>${escapeXml(shopInfo.currencyCode)}</currencyId>\n`;
+    xml += `        <description>${escapeXml(finalDesc)}</description>\n`;
+    xml += '        <param name="width, mm">350</param>\n';
+    xml += '        <param name="height, mm">400</param>\n';
+
+    if (!shouldOmitQty && parsedQty > 0) {
       xml += `        <qty>${parsedQty}</qty>\n`;
     }
     
