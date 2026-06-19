@@ -97,7 +97,7 @@ export function buildXmlFeed(variants, shopInfo) {
   
   xml += "  <offers>\n";
   for (const variant of variants) {
-    const variantId = variant.id.split("/").pop();
+    const variantId = variant.id ? variant.id.split("/").pop() : "";
     const productTitle = variant.product?.title || "";
     const variantTitle = variant.title || "";
     
@@ -114,7 +114,16 @@ export function buildXmlFeed(variants, shopInfo) {
     const categoryId = shopInfo.categoriesMap.get(rawType.trim()) || 1;
     
     const productHandle = variant.product?.handle || "";
-    const productUrl = `${shopInfo.url}/products/${productHandle}`;
+    const productUrl = productHandle ? `${shopInfo.url}/products/${productHandle}` : "";
+    
+    if (!variantId || !productUrl || !name || !price || parseFloat(price) <= 0 || !picture) {
+      continue;
+    }
+    
+    let finalDesc = description.trim();
+    if (!finalDesc) {
+      finalDesc = name;
+    }
     
     const consistMetafield = variant.product?.metafield?.value;
     const consistItems = parseComposition(consistMetafield);
@@ -126,9 +135,20 @@ export function buildXmlFeed(variants, shopInfo) {
     xml += `        <picture>${escapeXml(picture)}</picture>\n`;
     xml += `        <price>${escapeXml(price)}</price>\n`;
     xml += `        <currencyId>${escapeXml(shopInfo.currencyCode)}</currencyId>\n`;
-    xml += `        <description>${escapeXml(description)}</description>\n`;
+    xml += `        <description>${escapeXml(finalDesc)}</description>\n`;
     xml += '        <param name="width, mm">350</param>\n';
     xml += '        <param name="height, mm">400</param>\n';
+    
+    const lowerType = rawType.toLowerCase();
+    const isFlowersOrEdible = lowerType.includes("flower") || lowerType.includes("bouquet");
+    const hasFlowersConsist = consistItems.some((item) => item.name.toLowerCase() === "flowers");
+    const shouldOmitQty = isFlowersOrEdible || hasFlowersConsist;
+    
+    if (!shouldOmitQty) {
+      const parsedQty = Math.max(0, parseInt(variant.inventoryQuantity ?? 0, 10));
+      xml += `        <qty>${parsedQty}</qty>\n`;
+    }
+    
     for (const item of consistItems) {
       xml += `        <consist name="${escapeXml(item.name)}" unit="pcs">${item.qty}</consist>\n`;
     }
