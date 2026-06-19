@@ -48,6 +48,36 @@ async function run() {
   const tokenHeader = ["X", "Shopify", "Access", "Token"].join(dash);
   const contentTypeHeader = ["Content", "Type"].join(dash);
   
+  const shopQuery = `
+    query {
+      shop {
+        name
+        url
+        currencyCode
+      }
+    }
+  `;
+  
+  const shopResponse = await fetch(url, {
+    method: "POST",
+    headers: {
+      [tokenHeader]: accessToken,
+      [contentTypeHeader]: "application/json"
+    },
+    body: JSON.stringify({ query: shopQuery })
+  });
+  
+  if (!shopResponse.ok) {
+    const errText = await shopResponse.text();
+    throw new Error(errText);
+  }
+  
+  const shopResult = await shopResponse.json();
+  if (shopResult.errors) {
+    throw new Error(JSON.stringify(shopResult.errors));
+  }
+  const shopData = shopResult.data?.shop || {};
+  
   const query = `
     query getProductVariants($first: Int!, $after: String) {
       productVariants(first: $first, after: $after) {
@@ -62,6 +92,8 @@ async function run() {
             }
             product {
               title
+              handle
+              productType
               description
               featuredImage {
                 url
@@ -126,7 +158,31 @@ async function run() {
     }
   }
   
-  const xml = buildXmlFeed(allVariants);
+  const categoriesMap = new Map();
+  let categoryIdCounter = 1;
+  for (const variant of allVariants) {
+    const rawType = variant.product?.productType || "Bouquets";
+    const type = rawType.trim();
+    if (!categoriesMap.has(type)) {
+      categoriesMap.set(type, categoryIdCounter++);
+    }
+  }
+  
+  const categoriesList = Array.from(categoriesMap.entries()).map(([name, id]) => ({
+    id,
+    name
+  }));
+  
+  const shopInfo = {
+    name: shopData.name || "Flower Station",
+    company: shopData.name || "Flower Station",
+    url: (shopData.url || `https://${shop}`).replace(/\/$/, ""),
+    currencyCode: shopData.currencyCode || "GBP",
+    categories: categoriesList,
+    categoriesMap
+  };
+  
+  const xml = buildXmlFeed(allVariants, shopInfo);
   
   const dirPath = path.join(process.cwd(), "public", "feeds");
   await fs.mkdir(dirPath, { recursive: true });

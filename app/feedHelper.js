@@ -32,7 +32,51 @@ export function formatFeedDate(dateObj) {
   return `${year}${dash}${month}${dash}${day} ${hours}:${minutes}`;
 }
 
-export function buildXmlFeed(variants) {
+export function parseComposition(metafieldValue) {
+  if (!metafieldValue) {
+    return [{ name: "Flowers", qty: 1 }];
+  }
+  
+  const delimiter = metafieldValue.includes("|") ? "|" : ",";
+  const parts = metafieldValue.split(delimiter);
+  const items = [];
+  
+  for (const part of parts) {
+    const trimmed = part.trim();
+    if (!trimmed) {
+      continue;
+    }
+    
+    const prefixMatch = trimmed.match(/^(x)?\s*(\d+)\s*(x)?\s+(.*)$/i);
+    if (prefixMatch) {
+      const qty = parseInt(prefixMatch[2], 10);
+      const name = prefixMatch[4].trim();
+      if (name && qty > 0) {
+        items.push({ name, qty });
+        continue;
+      }
+    }
+    
+    const suffixMatch = trimmed.match(/^(.*)\s+x\s*(\d+)$/i) || trimmed.match(/^(.*)\s+(\d+)\s*x$/i);
+    if (suffixMatch) {
+      const name = suffixMatch[1].trim();
+      const qty = parseInt(suffixMatch[2], 10);
+      if (name && qty > 0) {
+        items.push({ name, qty });
+        continue;
+      }
+    }
+    
+    items.push({ name: trimmed, qty: 1 });
+  }
+  
+  if (items.length === 0) {
+    return [{ name: "Flowers", qty: 1 }];
+  }
+  return items;
+}
+
+export function buildXmlFeed(variants, shopInfo) {
   const dash = String.fromCharCode(45);
   const encoding = "UTF" + dash + "8";
   const xmlHeader = `<?xml version="1.0" encoding="${encoding}"?>`;
@@ -41,8 +85,17 @@ export function buildXmlFeed(variants) {
   let xml = `${xmlHeader}\n`;
   xml += `<yml_catalog date="${formattedDate}">\n`;
   xml += "  <shop>\n";
-  xml += "    <offers>\n";
+  xml += `    <name>${escapeXml(shopInfo.name)}</name>\n`;
+  xml += `    <company>${escapeXml(shopInfo.company)}</company>\n`;
+  xml += `    <url>${escapeXml(shopInfo.url)}</url>\n`;
+  xml += "    <categories>\n";
+  for (const cat of shopInfo.categories) {
+    xml += `      <category id="${cat.id}">${escapeXml(cat.name)}</category>\n`;
+  }
+  xml += "    </categories>\n";
+  xml += "  </shop>\n";
   
+  xml += "  <offers>\n";
   for (const variant of variants) {
     const variantId = variant.id.split("/").pop();
     const productTitle = variant.product?.title || "";
@@ -56,23 +109,33 @@ export function buildXmlFeed(variants) {
     const price = variant.price || "0.00";
     const picture = variant.image?.url || variant.product?.featuredImage?.url || "";
     const description = variant.product?.description || variant.product?.descriptionHtml || "";
-    const qty = variant.inventoryQuantity ?? 0;
+    
+    const rawType = variant.product?.productType || "Bouquets";
+    const categoryId = shopInfo.categoriesMap.get(rawType.trim()) || 1;
+    
+    const productHandle = variant.product?.handle || "";
+    const productUrl = `${shopInfo.url}/products/${productHandle}`;
     
     const consistMetafield = variant.product?.metafield?.value;
-    const consistName = consistMetafield || "Flowers";
+    const consistItems = parseComposition(consistMetafield);
     
-    xml += `      <offer id="${escapeXml(variantId)}">\n`;
+    xml += `      <offer id="${escapeXml(variantId)}" available="true">\n`;
+    xml += `        <url>${escapeXml(productUrl)}</url>\n`;
     xml += `        <name>${escapeXml(name)}</name>\n`;
-    xml += `        <price>${escapeXml(price)}</price>\n`;
+    xml += `        <categoryId>${categoryId}</categoryId>\n`;
     xml += `        <picture>${escapeXml(picture)}</picture>\n`;
+    xml += `        <price>${escapeXml(price)}</price>\n`;
+    xml += `        <currencyId>${escapeXml(shopInfo.currencyCode)}</currencyId>\n`;
     xml += `        <description>${escapeXml(description)}</description>\n`;
-    xml += `        <qty>${parseInt(qty, 10)}</qty>\n`;
-    xml += `        <consist name="${escapeXml(consistName)}"/>\n`;
-    xml += "      </offer>\n";
+    xml += '        <param name="width, mm">350</param>\n';
+    xml += '        <param name="height, mm">400</param>\n';
+    for (const item of consistItems) {
+      xml += `        <consist name="${escapeXml(item.name)}" unit="pcs">${item.qty}</consist>\n`;
+    }
+    xml += `      </offer>\n`;
   }
   
-  xml += "    </offers>\n";
-  xml += "  </shop>\n";
+  xml += "  </offers>\n";
   xml += "</yml_catalog>\n";
   
   return xml;
