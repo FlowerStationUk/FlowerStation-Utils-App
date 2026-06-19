@@ -32,42 +32,59 @@ export function formatFeedDate(dateObj) {
   return `${year}${dash}${month}${dash}${day} ${hours}:${minutes}`;
 }
 
-export function parseComposition(metafieldValue) {
-  if (!metafieldValue) {
-    return [{ name: "Flowers", qty: 1 }];
-  }
-  
-  const delimiter = metafieldValue.includes("|") ? "|" : ",";
-  const parts = metafieldValue.split(delimiter);
+export function parseComposition(metafieldValue, typeValue) {
   const items = [];
   
-  for (const part of parts) {
-    const trimmed = part.trim();
-    if (!trimmed) {
-      continue;
-    }
-    
-    const prefixMatch = trimmed.match(/^(x)?\s*(\d+)\s*(x)?\s+(.*)$/i);
-    if (prefixMatch) {
-      const qty = parseInt(prefixMatch[2], 10);
-      const name = prefixMatch[4].trim();
-      if (name && qty > 0) {
-        items.push({ name, qty });
+  if (metafieldValue) {
+    const delimiter = metafieldValue.includes("|") ? "|" : ",";
+    const parts = metafieldValue.split(delimiter);
+    for (const part of parts) {
+      const trimmed = part.trim();
+      if (!trimmed) {
         continue;
       }
+      
+      const prefixMatch = trimmed.match(/^(x)?\s*(\d+)\s*(x)?\s+(.*)$/i);
+      if (prefixMatch) {
+        const qty = parseInt(prefixMatch[2], 10);
+        const name = prefixMatch[4].trim();
+        if (name && qty > 0) {
+          items.push({ name, qty });
+          continue;
+        }
+      }
+      
+      const suffixMatch = trimmed.match(/^(.*)\s+x\s*(\d+)$/i) || trimmed.match(/^(.*)\s+(\d+)\s*x$/i);
+      if (suffixMatch) {
+        const name = suffixMatch[1].trim();
+        const qty = parseInt(suffixMatch[2], 10);
+        if (name && qty > 0) {
+          items.push({ name, qty });
+          continue;
+        }
+      }
+      
+      items.push({ name: trimmed, qty: 1 });
     }
-    
-    const suffixMatch = trimmed.match(/^(.*)\s+x\s*(\d+)$/i) || trimmed.match(/^(.*)\s+(\d+)\s*x$/i);
-    if (suffixMatch) {
-      const name = suffixMatch[1].trim();
-      const qty = parseInt(suffixMatch[2], 10);
-      if (name && qty > 0) {
-        items.push({ name, qty });
-        continue;
+  }
+  
+  if (items.length === 0 && typeValue) {
+    try {
+      const parsed = JSON.parse(typeValue);
+      if (Array.isArray(parsed)) {
+        for (const val of parsed) {
+          const name = String(val).trim();
+          if (name) {
+            items.push({ name, qty: 1 });
+          }
+        }
+      }
+    } catch (err) {
+      const valStr = String(typeValue).trim();
+      if (valStr) {
+        items.push({ name: valStr, qty: 1 });
       }
     }
-    
-    items.push({ name: trimmed, qty: 1 });
   }
   
   if (items.length === 0) {
@@ -125,8 +142,9 @@ export function buildXmlFeed(variants, shopInfo) {
       finalDesc = name;
     }
     
-    const consistMetafield = variant.product?.metafield?.value;
-    const consistItems = parseComposition(consistMetafield);
+    const consistMetafield = variant.product?.composition?.value;
+    const typeMetafield = variant.product?.type?.value;
+    const consistItems = parseComposition(consistMetafield, typeMetafield);
     
     xml += `      <offer id="${escapeXml(variantId)}" available="true">\n`;
     xml += `        <url>${escapeXml(productUrl)}</url>\n`;

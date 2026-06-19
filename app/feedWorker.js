@@ -98,7 +98,10 @@ async function run() {
               featuredImage {
                 url
               }
-              metafield(namespace: "custom", key: "composition") {
+              composition: metafield(namespace: "custom", key: "composition") {
+                value
+              }
+              type: metafield(namespace: "custom", key: "type") {
                 value
               }
             }
