@@ -140,7 +140,7 @@ export function buildXmlFeed(variants, shopInfo) {
     const productHandle = variant.product?.handle || "";
     const productUrl = productHandle ? `${shopInfo.url}/products/${productHandle}` : "";
 
-    if (!variantId || !productUrl || !name || priceRaw <= 0 || !picture) {
+    if (!variantId || !productUrl || !name || priceRaw <= 0 || priceRaw > 50000 || !picture) {
       continue;
     }
 
