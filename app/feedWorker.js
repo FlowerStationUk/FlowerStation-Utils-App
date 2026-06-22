@@ -162,21 +162,25 @@ async function run() {
     }
   }
   
+  const feedVariants = allVariants.filter(
+    (v) => (v.product?.productType || "").toLowerCase().trim() !== "test-product"
+  );
+
   const categoriesMap = new Map();
   let categoryIdCounter = 1;
-  for (const variant of allVariants) {
+  for (const variant of feedVariants) {
     const rawType = variant.product?.productType || "Bouquets";
     const type = rawType.trim();
     if (!categoriesMap.has(type)) {
       categoriesMap.set(type, categoryIdCounter++);
     }
   }
-  
+
   const categoriesList = Array.from(categoriesMap.entries()).map(([name, id]) => ({
     id,
     name
   }));
-  
+
   const shopInfo = {
     name: shopData.name || "Flower Station",
     company: shopData.name || "Flower Station",
@@ -185,8 +189,8 @@ async function run() {
     categories: categoriesList,
     categoriesMap
   };
-  
-  const xml = buildXmlFeed(allVariants, shopInfo);
+
+  const xml = buildXmlFeed(feedVariants, shopInfo);
   
   const dirPath = path.join(process.cwd(), "public", "feeds");
   await fs.mkdir(dirPath, { recursive: true });

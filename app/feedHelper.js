@@ -114,16 +114,19 @@ export function buildXmlFeed(variants, shopInfo) {
   xml += "  </shop>\n";
   
   xml += "  <offers>\n";
+
+  const usedNames = new Set();
+
   for (const variant of variants) {
     const variantId = variant.id ? variant.id.split("/").pop() : "";
     const productTitle = variant.product?.title || "";
     const variantTitle = variant.title || "";
-    
+
     let name = productTitle;
     if (variantTitle !== "Default Title" && variantTitle !== "") {
       name = `${productTitle} ${dash} ${variantTitle}`;
     }
-    
+
     const priceRaw = Math.round(parseFloat(variant.price || "0") || 0);
     const compareAtRaw = Math.round(parseFloat(variant.compareAtPrice || "0") || 0);
     const oldPrice = compareAtRaw > priceRaw ? compareAtRaw : priceRaw;
@@ -141,9 +144,15 @@ export function buildXmlFeed(variants, shopInfo) {
       continue;
     }
 
+    let uniqueName = name;
+    if (usedNames.has(uniqueName)) {
+      uniqueName = `${name} ${dash} ${variantId}`;
+    }
+    usedNames.add(uniqueName);
+
     let finalDesc = description.trim();
     if (!finalDesc) {
-      finalDesc = name;
+      finalDesc = uniqueName;
     }
 
     const consistMetafield = variant.product?.composition?.value;
@@ -151,7 +160,8 @@ export function buildXmlFeed(variants, shopInfo) {
     const consistItems = parseComposition(consistMetafield, typeMetafield);
 
     const lowerType = rawType.toLowerCase();
-    const isNonFloral = ["plant", "bear", "vase", "balloon", "chocolate", "jewellery", "jewelry", "gift card"].some(
+    const isGiftCard = lowerType.includes("gift card");
+    const isNonFloral = isGiftCard || ["plant", "bear", "vase", "balloon", "chocolate", "jewellery", "jewelry"].some(
       (kw) => lowerType.includes(kw)
     );
     const floralConsistNames = new Set([
@@ -167,11 +177,13 @@ export function buildXmlFeed(variants, shopInfo) {
     const shouldOmitQty = !isNonFloral || hasFloralConsist;
 
     const parsedQty = Math.max(0, parseInt(variant.inventoryQuantity ?? 0, 10));
-    const isAvailable = shouldOmitQty || parsedQty > 0;
+    // Gift cards are digital — always available; use qty=1 when Shopify shows 0
+    const effectiveQty = isGiftCard && parsedQty === 0 ? 1 : parsedQty;
+    const isAvailable = isGiftCard || shouldOmitQty || effectiveQty > 0;
 
     xml += `      <offer id="${escapeXml(variantId)}" available="${isAvailable ? "true" : "false"}">\n`;
     xml += `        <url>${escapeXml(productUrl)}</url>\n`;
-    xml += `        <name>${escapeXml(name)}</name>\n`;
+    xml += `        <name>${escapeXml(uniqueName)}</name>\n`;
     xml += `        <categoryId>${categoryId}</categoryId>\n`;
     xml += `        <picture>${escapeXml(picture)}</picture>\n`;
     xml += `        <price>${priceRaw}</price>\n`;
@@ -181,8 +193,8 @@ export function buildXmlFeed(variants, shopInfo) {
     xml += '        <param name="width, mm">350</param>\n';
     xml += '        <param name="height, mm">400</param>\n';
 
-    if (!shouldOmitQty && parsedQty > 0) {
-      xml += `        <qty>${parsedQty}</qty>\n`;
+    if (!shouldOmitQty && effectiveQty > 0) {
+      xml += `        <qty>${effectiveQty}</qty>\n`;
     }
     
     for (const item of consistItems) {
