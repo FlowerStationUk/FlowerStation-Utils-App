@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<yml_catalog date="2026-06-22 06:38">
+<yml_catalog date="2026-07-09 13:07">
   <shop>
     <name>Flower Station</name>
     <company>Flower Station</company>
@@ -944,7 +944,7 @@
         <description>Send balloons with flowers, or plants to make your loved one’s day even more special.For other designs, shapes and sizes, please call our London florist headquarters.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1486</qty>
+        <qty>1485</qty>
       </offer>
       <offer id="48809585508682" available="true">
         <url>https://www.flowerstation.co.uk/products/pink-roses</url>
@@ -1057,7 +1057,7 @@
         <description>Spread the love with our 18-Inch Heart Balloon! This vibrant heart-shaped balloon adds extra joy to any celebration. Perfect for birthdays, anniversaries, or just because, this cheerful balloon is a fun way to show someone you care, whether it&apos;s for a special occasion or a spontaneous surprise!</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1469</qty>
+        <qty>1457</qty>
       </offer>
       <offer id="48809586229578" available="true">
         <url>https://www.flowerstation.co.uk/products/18-inch-good-luck-balloon-x5</url>
@@ -2367,7 +2367,7 @@
         <description>Brighten up any celebration with the vibrant Rainbow Love Balloon! This 18-inch balloon features a radiant spectrum of colours, spreading positivity and joy wherever it floats. Perfect for birthdays, anniversaries, or simply to show someone you care. This helium-inflated balloon makes an ideal add-on to any bouquet or gift arrangement from Flower Station. Let the colours of love fill the room.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1496</qty>
+        <qty>1495</qty>
       </offer>
       <offer id="48809589801290" available="true">
         <url>https://www.flowerstation.co.uk/products/sendballoons-18-inch-get-well-soon-x3</url>
@@ -4175,7 +4175,7 @@
         <description>Baby Boy Balloon</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1485</qty>
+        <qty>1484</qty>
       </offer>
       <offer id="48809602711882" available="true">
         <url>https://www.flowerstation.co.uk/products/get-well-sunflowers-balloon</url>
@@ -6407,7 +6407,7 @@
         <url>https://www.flowerstation.co.uk/products/avenue-q-flowers</url>
         <name>Avenue Q - Standard</name>
         <categoryId>2</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/avenue_q_bouquet_-_flower_station__87459-copy__06920.1709982194.800.800.jpg?v=1720103371</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/flower-station-avenue-q-floral-bouquet.jpg?v=1782303877</picture>
         <price>125</price>
         <oldprice>185</oldprice>
         <currencyId>GBP</currencyId>
@@ -6424,7 +6424,7 @@
         <url>https://www.flowerstation.co.uk/products/avenue-q-flowers</url>
         <name>Avenue Q - Deluxe</name>
         <categoryId>2</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/avenue_q_bouquet_-_flower_station__87459-copy__06920.1709982194.800.800.jpg?v=1720103371</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/flower-station-avenue-q-floral-bouquet.jpg?v=1782303877</picture>
         <price>165</price>
         <oldprice>259</oldprice>
         <currencyId>GBP</currencyId>
@@ -6691,8 +6691,8 @@
         <name>Kentia And Ivy Bowl</name>
         <categoryId>3</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/res__72348.1695201320.800.800.jpg?v=1720103370</picture>
-        <price>77</price>
-        <oldprice>77</oldprice>
+        <price>58</price>
+        <oldprice>58</oldprice>
         <currencyId>GBP</currencyId>
         <description>A very long lasting option for many a household, or an office. This plant combination of mini kentia palms and ivy is a great contemporary arrangement that will do well on any office table, or a modern household. Please give our customer service team a call should you wish to make some changes to a selected product or have any questions. We may at times make suitable substitutions of flowers or pots depending on stock availability, however we always aim to notify our customers of such a change.</description>
         <param name="width, mm">350</param>
@@ -6785,7 +6785,7 @@
         <description>Perfect for standard size bouquets. Dimensions: Height: 20cm, Width: 10cm.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1403</qty>
+        <qty>1400</qty>
       </offer>
       <offer id="48809611624778" available="true">
         <url>https://www.flowerstation.co.uk/products/bethlehem</url>
@@ -7721,7 +7721,7 @@
         <description>Florence Vase</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1475</qty>
+        <qty>1458</qty>
       </offer>
       <offer id="48809615327562" available="false">
         <url>https://www.flowerstation.co.uk/products/large-euphorbia-in-a-pot</url>
@@ -7880,7 +7880,7 @@
         <description>Perfect for Deluxe size bouquets and luxury collection bouquets. Dimensions: Height: 40cm, Width: 15cm.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1499</qty>
+        <qty>1498</qty>
       </offer>
       <offer id="48809616277834" available="true">
         <url>https://www.flowerstation.co.uk/products/sunday-in-scotland-gift-set-1</url>
@@ -8184,13 +8184,13 @@
         <name>Calathea Gem</name>
         <categoryId>3</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/calathea-600px__10924.1672749507.800.800.jpg?v=1720103416</picture>
-        <price>35</price>
-        <oldprice>35</oldprice>
+        <price>30</price>
+        <oldprice>30</oldprice>
         <currencyId>GBP</currencyId>
         <description>One of the favourite indoor plants that will surprise you for their reaction to the light. This Calathea comes nicely arranged in a ceramic pot. Note that the pot might vary due to stock and availability. (Approx height: 50cms)</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1492</qty>
+        <qty>1491</qty>
       </offer>
       <offer id="48809618342218" available="true">
         <url>https://www.flowerstation.co.uk/products/wild-at-heart-noshy-truffles</url>
@@ -8355,7 +8355,7 @@
         <description>Perfect for standard size bouquets</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1436</qty>
+        <qty>1426</qty>
       </offer>
       <offer id="48809619554634" available="true">
         <url>https://www.flowerstation.co.uk/products/501-red-roses-bouquet-collection-only</url>
@@ -8486,7 +8486,7 @@
         <description>For the biggest hugs, our 75cm Brown Bear is the perfect companion. Delightfully soft and full of warmth, it’s even better when gifted with a stunning bouquet.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1497</qty>
+        <qty>1495</qty>
       </offer>
       <offer id="48809619980618" available="true">
         <url>https://www.flowerstation.co.uk/products/pink-orchid-promotion</url>
@@ -8789,8 +8789,8 @@
         <name>Sansevieria Zeylanica</name>
         <categoryId>3</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/front-brown-res_2__20556.1691515149.800.800.jpg?v=1720103431</picture>
-        <price>39</price>
-        <oldprice>39</oldprice>
+        <price>36</price>
+        <oldprice>36</oldprice>
         <currencyId>GBP</currencyId>
         <description>Indulge in the house plant fever with our exquisite Sansevieria Zeylanica, a stunning variety of the beloved snake plant that is both versatile and easy to care for. Whether you&apos;re celebrating a housewarming or treating yourself to a special thank you gift, this impressive plant has won the hearts of our valued customers. Arriving in a charming ceramic pot, this beautiful plant stands at approximately 40 cms in height and is ready to bring a touch of green goodness to your space. Take advantage of our convenient London delivery and Nationwide shipping services, and let this captivating Sansevieria Zeylanica grace your home with its natural charm.</description>
         <param name="width, mm">350</param>
@@ -9068,13 +9068,13 @@
         <name>Potted Calathea</name>
         <categoryId>3</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/front-spot-calathea__60632.1690296933.800.800.jpg?v=1720103429</picture>
-        <price>39</price>
-        <oldprice>39</oldprice>
+        <price>25</price>
+        <oldprice>25</oldprice>
         <currencyId>GBP</currencyId>
         <description>Meet the Calathea lancifolia, a stunning and captivating houseplant! With its upright, lance-shaped leaves boasting long wavy edges, it creates an eye-catching display as it gracefully spreads and forms clumps over time. The variegated leaves feature dark green strokes, while the undersides delight with a velvety burgundy red touch. You might also hear it being referred to as the Rattlesnake plant or Calathea insignis. A true gem to have in any indoor space! Pot colour and/or design vary subject to availability. (Approx height: 45 cms)</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1495</qty>
+        <qty>1494</qty>
       </offer>
       <offer id="48809622110538" available="true">
         <url>https://www.flowerstation.co.uk/products/5-red-rose-heads-in-luxury-box</url>
@@ -9195,7 +9195,7 @@
         <description>Perfect for Standard and Deluxe size bouquets. Dimensions: Height: 32cm, Width: 20cm.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1499</qty>
+        <qty>1498</qty>
       </offer>
       <offer id="48809622470986" available="true">
         <url>https://www.flowerstation.co.uk/products/scented-candle-chocolates-sparkling-rose</url>
@@ -9214,7 +9214,7 @@
         <name>Pink Hydrangea in Ceramic Pot</name>
         <categoryId>5</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Untitleddesign_1.png?v=1743275287</picture>
-        <price>38</price>
+        <price>30</price>
         <oldprice>55</oldprice>
         <currencyId>GBP</currencyId>
         <description>A perfect planted gift for a new born baby girl or just a perfect gift for all of us in love with hydrangea plants. This magnificent pink hydrangea plant is around 40cm tall and comes arranged in a ceramic pot (colour and style subject to availability). Please give our customer service team a call should you wish to make some changes to a selected product or have any questions. We may at times make suitable substitutions of flowers, depending on stock availability, however we always aim to notify our customers of such a change.</description>
@@ -9402,7 +9402,7 @@
         <description>Add a touch of luxury to your flower delivery with our delicious Ferrero Rocher Praline Chocolates. Each golden-wrapped chocolate combines smooth milk chocolate, a whole roasted hazelnut, and a creamy praline centre — a truly irresistible treat. Perfect as an add-on gift with your flower bouquet, these iconic Ferrero Rocher chocolates make any occasion extra special — whether it’s a birthday, anniversary, Valentine’s Day, or just to say “thank you.” Order online from Flower Station London and make your gift delivery even sweeter. Beautiful, indulgent, and oh-so-yummy.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1450</qty>
+        <qty>1448</qty>
       </offer>
       <offer id="48809623322954" available="true">
         <url>https://www.flowerstation.co.uk/products/letterbox-flowers-monthly-subscription</url>
@@ -9834,9 +9834,9 @@
         <url>https://www.flowerstation.co.uk/products/iberian-beauty</url>
         <name>Iberian Beauty - Standard</name>
         <categoryId>5</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/20e31fd9-c120-4660-875c-b4ec1c96f928__23559.1692186459.800.800.jpg?v=1720801793</picture>
-        <price>45</price>
-        <oldprice>69</oldprice>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/flower-station-sunflower-orchid-bouquet.jpg?v=1783523216</picture>
+        <price>55</price>
+        <oldprice>55</oldprice>
         <currencyId>GBP</currencyId>
         <description>A giant and imposing bloom, the sunflower in any arrangement is a sure fire head-turner capable of catching the eye wherever it goes. Be bold and let this bouquet of beautiful sunflowers, pink Phalaenopsis and yellow solidago transport you to a time of eternal summer.</description>
         <param name="width, mm">350</param>
@@ -9878,9 +9878,9 @@
         <url>https://www.flowerstation.co.uk/products/iberian-beauty</url>
         <name>Iberian Beauty - Deluxe</name>
         <categoryId>5</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/20e31fd9-c120-4660-875c-b4ec1c96f928__23559.1692186459.800.800.jpg?v=1720801793</picture>
-        <price>63</price>
-        <oldprice>97</oldprice>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/flower-station-sunflower-orchid-bouquet.jpg?v=1783523216</picture>
+        <price>78</price>
+        <oldprice>78</oldprice>
         <currencyId>GBP</currencyId>
         <description>A giant and imposing bloom, the sunflower in any arrangement is a sure fire head-turner capable of catching the eye wherever it goes. Be bold and let this bouquet of beautiful sunflowers, pink Phalaenopsis and yellow solidago transport you to a time of eternal summer.</description>
         <param name="width, mm">350</param>
@@ -13490,7 +13490,7 @@
         <url>https://www.flowerstation.co.uk/products/pink-dianthus</url>
         <name>Pink Dianthus - Standard</name>
         <categoryId>5</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/front-res__25931.1695140414.800.800.jpg?v=1720801821</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/flower-station-pink-dianthus-bouquet.jpg?v=1783525568</picture>
         <price>45</price>
         <oldprice>45</oldprice>
         <currencyId>GBP</currencyId>
@@ -13505,7 +13505,7 @@
         <url>https://www.flowerstation.co.uk/products/pink-dianthus</url>
         <name>Pink Dianthus - Deluxe</name>
         <categoryId>5</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/front-res__25931.1695140414.800.800.jpg?v=1720801821</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/flower-station-pink-dianthus-bouquet.jpg?v=1783525568</picture>
         <price>58</price>
         <oldprice>58</oldprice>
         <currencyId>GBP</currencyId>
@@ -14606,7 +14606,7 @@
       <offer id="48852080984394" available="true">
         <url>https://www.flowerstation.co.uk/products/white-hydrangea-and-eucalyptus-bouquet</url>
         <name>White Hydrangea and Eucalyptus Bouquet</name>
-        <categoryId>5</categoryId>
+        <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/top_bg__26421.1703249654.600.600.jpg?v=1770649644</picture>
         <price>36</price>
         <oldprice>36</oldprice>
@@ -15038,7 +15038,7 @@
         <name>Sunflower Delight</name>
         <categoryId>5</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/front-res__59720.1691061686.600.600.jpg?v=1720801836</picture>
-        <price>55</price>
+        <price>60</price>
         <oldprice>60</oldprice>
         <currencyId>GBP</currencyId>
         <description>Step into a world of yellow and purple bliss with our premium hand-tied bouquet! Bursting with vibrant energy from our finest sunflowers and wavyleaf sea lavender, this arrangement is the ultimate party centrepiece or a thoughtful treat for your loved ones. Spread the delight and indulge in the colours of happiness!</description>
@@ -15873,7 +15873,7 @@
         <categoryId>5</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/penelope-01---600px__01871.1718039848.600.600.jpg?v=1720801839</picture>
         <price>150</price>
-        <oldprice>160</oldprice>
+        <oldprice>150</oldprice>
         <currencyId>GBP</currencyId>
         <description>Inspired by Penelope from Bridgerton, this sublime hand-tied bouquet captures the elegance and charm of Regency-era floristry. Featuring a captivating combination of blue hydrangeas, coral, pink and white peonies, cream dianthus, white roses, white lisianthus, pink stocks and lush greenery, it achieves a harmonious balance that mesmerises onlookers. The intricate textures and enchanting blend of colours keep admirers spellbound, much like the enigmatic allure of Penelope herself.</description>
         <param name="width, mm">350</param>
@@ -16126,7 +16126,7 @@
         <description>This glass vase is perfect for most of our standard size hand-tied bouquets. Vases Delivered London &amp; UK. Dimensions: Height:19cm , Width:15cm.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1488</qty>
+        <qty>1486</qty>
       </offer>
       <offer id="48878862008650" available="true">
         <url>https://www.flowerstation.co.uk/products/slim-tall-clear-vase</url>
@@ -16152,7 +16152,19 @@
         <description>This White Glass Vase is the perfect addition to all our Luxury range of bouquets</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1498</qty>
+        <qty>1497</qty>
+      </offer>
+      <offer id="48914846155082" available="true">
+        <url>https://www.flowerstation.co.uk/products/test-pre-order</url>
+        <name>Test Pre-Order</name>
+        <categoryId>5</categoryId>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/option_31_11df9571-3aa1-4406-93a2-949203ad3fbe.jpg?v=1721915440</picture>
+        <price>25</price>
+        <oldprice>25</oldprice>
+        <currencyId>GBP</currencyId>
+        <description>Test Pre-Order</description>
+        <param name="width, mm">350</param>
+        <param name="height, mm">400</param>
       </offer>
       <offer id="49099819385162" available="true">
         <url>https://www.flowerstation.co.uk/products/leopard-lily</url>
@@ -16302,7 +16314,7 @@
       </offer>
       <offer id="49383813054794" available="true">
         <url>https://www.flowerstation.co.uk/products/autumn-whites</url>
-        <name>Winter Whites - Standard</name>
+        <name>Flawless - Standard</name>
         <categoryId>5</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/DSC00217_2aada5d0-a979-4b08-a927-5235e726c264.jpg?v=1728666591</picture>
         <price>59</price>
@@ -16315,7 +16327,7 @@
       </offer>
       <offer id="49383813087562" available="true">
         <url>https://www.flowerstation.co.uk/products/autumn-whites</url>
-        <name>Winter Whites - Deluxe</name>
+        <name>Flawless - Deluxe</name>
         <categoryId>5</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/DSC00217_2aada5d0-a979-4b08-a927-5235e726c264.jpg?v=1728666591</picture>
         <price>70</price>
@@ -16784,7 +16796,7 @@
         <param name="height, mm">400</param>
         <consist name="Necklaces" unit="pcs">1</consist>
       </offer>
-      <offer id="49504478822730" available="true">
+      <offer id="49504478822730" available="false">
         <url>https://www.flowerstation.co.uk/products/andean-fruits</url>
         <name>Tierra Hermosa 72% - Andean Fruits</name>
         <categoryId>17</categoryId>
@@ -16795,9 +16807,8 @@
         <description>Decadent and exotic. Blueberries, strawberries, raspberries and blackberries harvested in the Andean mountains of Ecuador are beautifully combined with our 72% dark chocolate. Enjoy the sophisticated flavours of this cacao harvested by a small group of growers from Manabí, Ecuador. It&apos;s an ideal pairing with a delicate cheese and your favourite red wine. London Academy of Chocolate Award Winner 2021.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1486</qty>
       </offer>
-      <offer id="49504482623818" available="true">
+      <offer id="49504482623818" available="false">
         <url>https://www.flowerstation.co.uk/products/pure-72-emblematic-bar</url>
         <name>Tierra Hermosa 72% - Pure</name>
         <categoryId>17</categoryId>
@@ -16808,9 +16819,8 @@
         <description>Enjoy the sophisticated floral, fruity, nutty and caramel nuances of Nacional cacao. Intoxicating dark chocolate named &quot;Tierra Hermosa&quot; (Beautiful Land) after its origin Manabí, Ecuador; it&apos;s our signature chocolate. In addition to its unique flavour, this chocolate has many symbols: it evokes heritage, femininity, delicacy and provenance. London Academy of Chocolate Award Winner 2018. (Ingredients: Nacional cacao beans, cacao butter, sugar cane. Vegan, dairy-free).</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1485</qty>
       </offer>
-      <offer id="49504501596490" available="true">
+      <offer id="49504501596490" available="false">
         <url>https://www.flowerstation.co.uk/products/jipijapa-coffee</url>
         <name>Tierra Hermosa 72% - Jipijapa Coffee</name>
         <categoryId>17</categoryId>
@@ -16821,9 +16831,8 @@
         <description>Deep, opulent and elegant. Tierra Hermosa 72% with speciality coffee from Jipijapa, harvested in Ecuador since 1850. Speciality chocolate enhances the Nacional cacao&apos;s floral, fruity, nutty, and caramel nuances. Tree-to-bar, especially hand-selected cacao beans by a small group of growers from Manabí, Ecuador. The perfect way to finish a dinner party with a piece of this chocolate and your favourite red wine or cognac. London Academy of Chocolate Award Winner 2020.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1498</qty>
       </offer>
-      <offer id="49504544031050" available="true">
+      <offer id="49504544031050" available="false">
         <url>https://www.flowerstation.co.uk/products/sea-salt-bar</url>
         <name>Tierra Hermosa 72% - Sea Salt</name>
         <categoryId>17</categoryId>
@@ -16834,7 +16843,6 @@
         <description>Intriguing and simply delicious. Tierra Hermosa 72% with sea salt. For those who love adventurous experiences. This speciality chocolate enhances the Nacional cacao&apos;s floral, fruity, nutty, and caramel nuances. Tree-to-bar, especially hand-selected cacao beans by a group of growers from Manabí, Ecuador. It&apos;s a beautiful pairing with a single malt. London Academy of Chocolate of Chocolate 2020.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1494</qty>
       </offer>
       <offer id="49504554451274" available="false">
         <url>https://www.flowerstation.co.uk/products/cacao-nibs</url>
@@ -16951,7 +16959,7 @@
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
       </offer>
-      <offer id="54851571679618" available="true">
+      <offer id="54851571679618" available="false">
         <url>https://www.flowerstation.co.uk/products/torquilla-case-chocolate-gift-set</url>
         <name>Torquilla Case Chocolate Gift Set</name>
         <categoryId>17</categoryId>
@@ -16962,9 +16970,8 @@
         <description>Contains 6 bars</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1499</qty>
       </offer>
-      <offer id="54851620995458" available="true">
+      <offer id="54851620995458" available="false">
         <url>https://www.flowerstation.co.uk/products/luxury-chocolate-box-gift-set</url>
         <name>⁠Luxury Chocolate Box Gift Set</name>
         <categoryId>17</categoryId>
@@ -16975,7 +16982,6 @@
         <description>⁠Luxury Chocolate Box Gift Set</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1492</qty>
       </offer>
       <offer id="54861485834626" available="true">
         <url>https://www.flowerstation.co.uk/products/christmas-tree-stand-8-12ft</url>
@@ -17661,7 +17667,7 @@
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
       </offer>
-      <offer id="54887943078274" available="true">
+      <offer id="54887943078274" available="false">
         <url>https://www.flowerstation.co.uk/products/tierra-hermosa-72-aged-rum</url>
         <name>Tierra Hermosa 72% - Aged Rum</name>
         <categoryId>17</categoryId>
@@ -17672,7 +17678,6 @@
         <description>This limited-edition chocolate bar is a collaboration with Don Miguel rum. This double-aged rum is an iconic brand that has won several awards for its exceptional flavours. It is delicate, elegant, and still complex, and it is crafted at 2,500 meters in the Ecuadorian Andes. Enjoy this magnificent experience! London Academy of Chocolate Award Winner 2021.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1496</qty>
       </offer>
       <offer id="54904795791746" available="true">
         <url>https://www.flowerstation.co.uk/products/the-wonder-of-you</url>
@@ -17703,8 +17708,8 @@
         <name>That’s Amore - Standard</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/BudgetBouquet_02_NoVase.png?v=1752582901</picture>
-        <price>49</price>
-        <oldprice>49</oldprice>
+        <price>35</price>
+        <oldprice>35</oldprice>
         <currencyId>GBP</currencyId>
         <description>Sing it with us... &quot;When the world seems to shine, like you&apos;ve had too much wine, that&apos;s amore!”. Playful and timeless, this bouquet features soft white carnations, light pink and fuchsia spray roses, beautifully complemented with eryngium and a touch of greenery. It&apos;s the perfect way to express your love and affection in a fun, vibrant way! STANDARD: White Carnations x3, Hot Pink Spray Roses x3, Pink Spray Roses x 3, Thistle x3, Ruscus DELUXE: White Carnations x5, Hot Pink Spray Roses x5, Pink Spray Roses x5, Thistle x5, Ruscus</description>
         <param name="width, mm">350</param>
@@ -17717,8 +17722,8 @@
         <name>That’s Amore - Deluxe</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/BudgetBouquet_02_Top.png?v=1752582901</picture>
-        <price>69</price>
-        <oldprice>69</oldprice>
+        <price>50</price>
+        <oldprice>50</oldprice>
         <currencyId>GBP</currencyId>
         <description>Sing it with us... &quot;When the world seems to shine, like you&apos;ve had too much wine, that&apos;s amore!”. Playful and timeless, this bouquet features soft white carnations, light pink and fuchsia spray roses, beautifully complemented with eryngium and a touch of greenery. It&apos;s the perfect way to express your love and affection in a fun, vibrant way! STANDARD: White Carnations x3, Hot Pink Spray Roses x3, Pink Spray Roses x 3, Thistle x3, Ruscus DELUXE: White Carnations x5, Hot Pink Spray Roses x5, Pink Spray Roses x5, Thistle x5, Ruscus</description>
         <param name="width, mm">350</param>
@@ -17746,7 +17751,7 @@
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/To_the_moon_and_back_remake_front.png?v=1743877774</picture>
         <price>70</price>
-        <oldprice>74</oldprice>
+        <oldprice>70</oldprice>
         <currencyId>GBP</currencyId>
         <description>For the ones you love To The Moon And Back. This captivating bouquet features bold white hydrangeas, symbolising the glowing, serene beauty of the moon. Soft white spray roses add a delicate touch of love, while striking eryngium thistles provide a unique contrast, like distant stars. A perfect bouquet to convey the depth of your love, from here to the moon and beyond. *Currently substituting white spray roses for long-stemmed white roses. STANDARD: White Hydrangeas x3, Blue Thistle x3, White Spray Roses x3, Ruscus DELUXE: x5 hyd, x5 thistle, x5 spray, ruscus</description>
         <param name="width, mm">350</param>
@@ -17789,8 +17794,8 @@
         <name>Galentines - Bouquet Only</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Budgetbouquet06_vase.png?v=1738323770</picture>
-        <price>40</price>
-        <oldprice>40</oldprice>
+        <price>33</price>
+        <oldprice>33</oldprice>
         <currencyId>GBP</currencyId>
         <description>Celebrate your besties with our Galentine&apos;s bouquet! It features hot pink roses, white and pink carnations, delicate baby’s breath, pink alstroemeria, and a splash of greenery. It’s the perfect way to show your favourite gals just how much they mean to you, whether it’s for Galentine’s Day or any day. Bright, cheerful, and filled with affection, it’s a celebration of friendship at its finest. STANDARD: Two-toned Purple Carnations x3, Hot Pink Spray Roses x3, Hot Pink Alstroemeria x5, Green Bell DELUXE: Two-toned Purple Carnations x5, Hot Pink Spray Roses x5, Hot Pink Alstroemeria x7, Green Bell</description>
         <param name="width, mm">350</param>
@@ -17805,8 +17810,8 @@
         <name>Galentines - Bouquet with Vase</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Budgetbouquet06_vase.png?v=1738323770</picture>
-        <price>52</price>
-        <oldprice>52</oldprice>
+        <price>50</price>
+        <oldprice>50</oldprice>
         <currencyId>GBP</currencyId>
         <description>Celebrate your besties with our Galentine&apos;s bouquet! It features hot pink roses, white and pink carnations, delicate baby’s breath, pink alstroemeria, and a splash of greenery. It’s the perfect way to show your favourite gals just how much they mean to you, whether it’s for Galentine’s Day or any day. Bright, cheerful, and filled with affection, it’s a celebration of friendship at its finest. STANDARD: Two-toned Purple Carnations x3, Hot Pink Spray Roses x3, Hot Pink Alstroemeria x5, Green Bell DELUXE: Two-toned Purple Carnations x5, Hot Pink Spray Roses x5, Hot Pink Alstroemeria x7, Green Bell</description>
         <param name="width, mm">350</param>
@@ -17851,8 +17856,8 @@
         <name>Love Is All You Need - Standard</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Budgetbouquet05_vase02.png?v=1771344010</picture>
-        <price>40</price>
-        <oldprice>40</oldprice>
+        <price>33</price>
+        <oldprice>33</oldprice>
         <currencyId>GBP</currencyId>
         <description>Sometimes, all you need is a simple way to show someone you care, and that’s exactly what our &quot;Love Is All You Need&quot; bouquet is here for. With classic red roses, sweet pink wax flowers, and a touch of fresh greenery, it’s the perfect little reminder that love doesn’t have to be extravagant to be meaningful. Whether it’s for a special occasion or just because, this budget-friendly bouquet says it all in the most heartfelt way. STANDARD: Red Spray Roses x3, Pink Wax x3, Green Bell, Hypericum x3 DELUXE: Red Spray Roses x5, Pink Wax x5, Green Bell, Hypericum x5</description>
         <param name="width, mm">350</param>
@@ -17864,8 +17869,8 @@
         <name>Love Is All You Need - Deluxe</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Budgetbouquet05_vase.png?v=1752582398</picture>
-        <price>50</price>
-        <oldprice>50</oldprice>
+        <price>45</price>
+        <oldprice>45</oldprice>
         <currencyId>GBP</currencyId>
         <description>Sometimes, all you need is a simple way to show someone you care, and that’s exactly what our &quot;Love Is All You Need&quot; bouquet is here for. With classic red roses, sweet pink wax flowers, and a touch of fresh greenery, it’s the perfect little reminder that love doesn’t have to be extravagant to be meaningful. Whether it’s for a special occasion or just because, this budget-friendly bouquet says it all in the most heartfelt way. STANDARD: Red Spray Roses x3, Pink Wax x3, Green Bell, Hypericum x3 DELUXE: Red Spray Roses x5, Pink Wax x5, Green Bell, Hypericum x5</description>
         <param name="width, mm">350</param>
@@ -17877,8 +17882,8 @@
         <name>You are my Sunshine - Bouquet Only</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/BudgetBouquet09_NoVase.png?v=1736535926</picture>
-        <price>45</price>
-        <oldprice>45</oldprice>
+        <price>30</price>
+        <oldprice>30</oldprice>
         <currencyId>GBP</currencyId>
         <description>Brighten someone’s day with our &quot;You Are My Sunshine&quot; bouquet! With sunny yellow spray roses, sweet pink wax flowers, fresh eucalyptus, and soft lepidium, it’s a little ray of happiness that says, &quot;You make me happy when skies are gray”. Whether you&apos;re celebrating someone special or just reminding them they light up your life, this bouquet is the perfect way to share a little sunshine! STANDARD: Yellow Spray Roses x3, Pink Waxflower x3, Green Bell + Eucalyptus DELUXE: Yellow Spray Roses x5, Pink Waxflower x5, Green Bell + Eucalyptus</description>
         <param name="width, mm">350</param>
@@ -17891,8 +17896,8 @@
         <name>You are my Sunshine - Bouquet with Vase</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/BudgetBouquet09.png?v=1738323794</picture>
-        <price>58</price>
-        <oldprice>58</oldprice>
+        <price>40</price>
+        <oldprice>40</oldprice>
         <currencyId>GBP</currencyId>
         <description>Brighten someone’s day with our &quot;You Are My Sunshine&quot; bouquet! With sunny yellow spray roses, sweet pink wax flowers, fresh eucalyptus, and soft lepidium, it’s a little ray of happiness that says, &quot;You make me happy when skies are gray”. Whether you&apos;re celebrating someone special or just reminding them they light up your life, this bouquet is the perfect way to share a little sunshine! STANDARD: Yellow Spray Roses x3, Pink Waxflower x3, Green Bell + Eucalyptus DELUXE: Yellow Spray Roses x5, Pink Waxflower x5, Green Bell + Eucalyptus</description>
         <param name="width, mm">350</param>
@@ -18017,16 +18022,16 @@
         <url>https://www.flowerstation.co.uk/products/newborn-bliss-bundle</url>
         <name>Hey Baby</name>
         <categoryId>24</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Hey_Baby.png?v=1750172142</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Hey_Baby_16ae1eb3-92aa-4fdf-8d75-2d69954317d3.png?v=1783339455</picture>
         <price>50</price>
         <oldprice>55</oldprice>
         <currencyId>GBP</currencyId>
-        <description>Our Hey Baby Bundle is a thoughtful and heartwarming gift for a loved one. This set includes a delicate Baby’s Breath arrangement in a charming vase, a cuddly White Teddy, perfect for those warm snuggles, and a premium Cárdenas chocolate bar, renowned for its rich, indulgent flavour… a little treat for loved ones to enjoy. Whether for a baby shower, as a welcome gift or just to show someone you care, this bundle is the perfect way to share in the joy of new beginnings.</description>
+        <description>Our Hey Baby Bundle is a thoughtful and heartwarming gift for a loved one. This set includes a delicate Baby’s Breath arrangement in a charming vase, a cuddly White Teddy, perfect for those warm snuggles, and Ferrero Rocher Chocolate Pralines, renowned for its rich, indulgent flavour… a little treat for loved ones to enjoy. Whether for a baby shower, as a welcome gift or just to show someone you care, this bundle is the perfect way to share in the joy of new beginnings.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
         <consist name="Baby&apos;s-breath" unit="pcs">1</consist>
       </offer>
-      <offer id="54919429456258" available="true">
+      <offer id="54919429456258" available="false">
         <url>https://www.flowerstation.co.uk/products/luxury-chocolate-trio</url>
         <name>Luxury Chocolate Trio</name>
         <categoryId>17</categoryId>
@@ -18037,13 +18042,12 @@
         <description>When one bar is just not enough, this set offers a variety of flavours to satisfy every craving. Indulge in the ultimate chocolate experience with our Luxury Chocolate Trio, featuring three award-winning Cárdenas chocolate bars from Ecuador. Renowned for their exceptional quality and rich, smooth texture, these chocolates are a true delight for any connoisseur or sweet tooth. Perfect for gifting or treating yourself, this trio invites you to explore the finest Ecuadorian chocolate with every bite.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1491</qty>
       </offer>
       <offer id="54920006664578" available="true">
         <url>https://www.flowerstation.co.uk/products/her-birthday-bloom-deluxe-gift-set</url>
         <name>Her Birthday Bloom Deluxe Gift Set</name>
         <categoryId>12</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/GiftSet1_Deluxeopenchocbox1.jpg?v=1737391623</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Gift_Set_1_Deluxe_2.png?v=1783340281</picture>
         <price>167</price>
         <oldprice>185</oldprice>
         <currencyId>GBP</currencyId>
@@ -18219,7 +18223,7 @@
         <description>Celebrate their achievement with our adorable 15cm Graduation Bear, dressed in a classic cap. A perfect keepsake for their special day! Pair it with a stunning bouquet to make their moment even more memorable.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1495</qty>
+        <qty>1494</qty>
       </offer>
       <offer id="54942252335490" available="true">
         <url>https://www.flowerstation.co.uk/products/get-well-soon-bear</url>
@@ -18232,7 +18236,7 @@
         <description>Lift their spirits with our 15cm Get Well Soon Bear, a soft and cuddly companion to brighten their day. Add a fresh bouquet to send your warmest wishes in style.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1492</qty>
+        <qty>1487</qty>
       </offer>
       <offer id="54942254170498" available="true">
         <url>https://www.flowerstation.co.uk/products/thank-you-bear</url>
@@ -18245,7 +18249,7 @@
         <description>Show your appreciation with our charming 15cm Thank You Bear, the perfect way to express your gratitude. Pair it with a beautiful flower arrangement for a truly heartfelt gesture.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1497</qty>
+        <qty>1496</qty>
       </offer>
       <offer id="54942256169346" available="true">
         <url>https://www.flowerstation.co.uk/products/large-cream-bear</url>
@@ -18430,8 +18434,8 @@
         <name>Sansevieria Snake Plant - 30cm</name>
         <categoryId>3</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/front-brown-res__69720.1691515154.800.800.jpg?v=1720103430</picture>
-        <price>20</price>
-        <oldprice>20</oldprice>
+        <price>18</price>
+        <oldprice>18</oldprice>
         <currencyId>GBP</currencyId>
         <description>Embrace the house plant revolution with our stunning Sansevieria Trifasciata, one of the most popular snake plants, a versatile and low-maintenance gem native to West Africa. Whether it&apos;s for a housewarming celebration or a special birthday treat (perhaps to pamper yourself?), this impressive plant remains a top choice among our cherished customers. Delivered right to your doorstep in a charming ceramic pot, take advantage of our convenient London delivery and Nationwide shipping services to bring the green goodness home! (Approx height: 35 cms)</description>
         <param name="width, mm">350</param>
@@ -18443,8 +18447,8 @@
         <name>Sansevieria Snake Plant - 45cm</name>
         <categoryId>3</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/front-grey-res__05157.1691515154.800.800.jpg?v=1720103430</picture>
-        <price>39</price>
-        <oldprice>39</oldprice>
+        <price>36</price>
+        <oldprice>36</oldprice>
         <currencyId>GBP</currencyId>
         <description>Embrace the house plant revolution with our stunning Sansevieria Trifasciata, one of the most popular snake plants, a versatile and low-maintenance gem native to West Africa. Whether it&apos;s for a housewarming celebration or a special birthday treat (perhaps to pamper yourself?), this impressive plant remains a top choice among our cherished customers. Delivered right to your doorstep in a charming ceramic pot, take advantage of our convenient London delivery and Nationwide shipping services to bring the green goodness home! (Approx height: 35 cms)</description>
         <param name="width, mm">350</param>
@@ -18524,7 +18528,7 @@
         <description>Spread the love with this helium balloon from our Valentine’s collection.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1475</qty>
+        <qty>1472</qty>
       </offer>
       <offer id="54963479183746" available="true">
         <url>https://www.flowerstation.co.uk/products/pink-valentine-day-balloon</url>
@@ -18549,7 +18553,7 @@
         <description>Spread the love with this helium balloon from our Valentine’s collection.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1421</qty>
+        <qty>1406</qty>
       </offer>
       <offer id="54963481903490" available="true">
         <url>https://www.flowerstation.co.uk/products/red-and-pink-i-love-you-balloon</url>
@@ -18628,8 +18632,8 @@
         <name>Sugar Plum Fairy - Standard</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Bouquet_03front.png?v=1752578828</picture>
-        <price>50</price>
-        <oldprice>50</oldprice>
+        <price>35</price>
+        <oldprice>35</oldprice>
         <currencyId>GBP</currencyId>
         <description>Whimsical and enchanting, the Sugar Plum Fairy bouquet is a delightful burst of colour that feels like a dream come true. Featuring bi-colour carnations that dance between vibrant purple alstroemeria and playful bright pink spray roses that pop with personality, this bouquet is a true celebration of beauty. Lush greenery weaves throughout, giving it a fresh and airy feel, making it perfect for anyone who loves a little magic in their day. Whether it’s for a special occasion or just to brighten someone’s world, the Sugar Plum Fairy bouquet is sure to spread joy and wonder.</description>
         <param name="width, mm">350</param>
@@ -18643,8 +18647,8 @@
         <name>Sugar Plum Fairy - Deluxe</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Bouquet_03front.png?v=1752578828</picture>
-        <price>60</price>
-        <oldprice>60</oldprice>
+        <price>45</price>
+        <oldprice>45</oldprice>
         <currencyId>GBP</currencyId>
         <description>Whimsical and enchanting, the Sugar Plum Fairy bouquet is a delightful burst of colour that feels like a dream come true. Featuring bi-colour carnations that dance between vibrant purple alstroemeria and playful bright pink spray roses that pop with personality, this bouquet is a true celebration of beauty. Lush greenery weaves throughout, giving it a fresh and airy feel, making it perfect for anyone who loves a little magic in their day. Whether it’s for a special occasion or just to brighten someone’s world, the Sugar Plum Fairy bouquet is sure to spread joy and wonder.</description>
         <param name="width, mm">350</param>
@@ -18708,7 +18712,7 @@
         <name>Thank You Gift Set</name>
         <categoryId>12</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Gift-Box-New-04_aa302c49-6184-4fa0-8529-7893fc7b019d.jpg?v=1742388562</picture>
-        <price>62</price>
+        <price>50</price>
         <oldprice>69</oldprice>
         <currencyId>GBP</currencyId>
         <description>Show someone you care with the Thank You Gift Set.This thoughtful pairing features a stunning Double Stemmed Pink Orchid, a long-lasting beauty symbolising love and strength, along with an adorable Thank You Bear to remind them how cherished they are. A heartfelt gift for someone special.</description>
@@ -18976,7 +18980,7 @@
       </offer>
       <offer id="55132226683266" available="true">
         <url>https://www.flowerstation.co.uk/products/tulips-in-a-vase</url>
-        <name>Vase of Tulips</name>
+        <name>Vase of Tulips Bouquet</name>
         <categoryId>5</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/front_8__08999.1681922179.600.600.jpg?v=1720801834</picture>
         <price>35</price>
@@ -19143,7 +19147,7 @@
         <description>Olive Tree (Olea europaea) Timeless, elegant, and full of Mediterranean charm. Bring a touch of the sun-soaked Mediterranean to your home or garden with our beautiful Olive Tree. Known for its silvery-green foliage and graceful shape, the Olive Tree is a symbol of peace, wisdom, and resilience. This evergreen beauty adds a sense of tranquillity and refined style to any space. Low-maintenance and drought-tolerant, Olive Trees are perfect for those who love greenery with minimal fuss. Over time, they develop a striking, gnarled trunk, giving them a sculptural, architectural presence.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1486</qty>
+        <qty>1483</qty>
       </offer>
       <offer id="55223305568642" available="true">
         <url>https://www.flowerstation.co.uk/products/rose-summer</url>
@@ -19587,11 +19591,11 @@
         <url>https://www.flowerstation.co.uk/products/bursting-with-pride</url>
         <name>Bursting with Pride</name>
         <categoryId>12</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/BurstingwithPride_2.png?v=1750171856</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Bursting_with_Pride.png?v=1783339590</picture>
         <price>225</price>
         <oldprice>250</oldprice>
         <currencyId>GBP</currencyId>
-        <description>They deserve to feel just as brilliant as their future. Celebrate their success in style with the Bursting with Pride gift set, a luxurious way to mark a truly unforgettable achievement. This joyful, indulgent gift includes our radiant Pride Bouquet, a bottle of Moët &amp; Chandon Champagne, a charming graduation bear, and luxury box of Cardenas chocolates. Perfectly packaged to say, “You did it!” with elegance and flair. You’re incredibly proud and this gift set is overflowing with love, celebration, and indulgence.</description>
+        <description>They deserve to feel just as brilliant as their future. Celebrate their success in style with the Bursting with Pride gift set, a luxurious way to mark a truly unforgettable achievement. This joyful, indulgent gift includes our radiant Pride Bouquet, a bottle of Moët &amp; Chandon Champagne, a charming graduation bear, and Ferrero Rocher Chocolate Pralines. Perfectly packaged to say, “You did it!” with elegance and flair. You’re incredibly proud and this gift set is overflowing with love, celebration, and indulgence.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
       </offer>
@@ -19690,7 +19694,7 @@
         <description>Soft, sweet, and full of charm, our Cream Medium Bear is a delightful addition to any gift. Pair it with a beautiful flower arrangement to create a truly heartwarming surprise.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1471</qty>
+        <qty>1468</qty>
       </offer>
       <offer id="55387615658370" available="false">
         <url>https://www.flowerstation.co.uk/products/rosie-pink-teddy-bear-25cm</url>
@@ -20540,7 +20544,7 @@
         <description>Delicate, airy, and full of charm, the asparagus fern is the perfect way to bring effortless greenery into your home or office. With its fine, feathery foliage and cascading shape, this plant adds a soft, elegant touch to any space. Housed in a sleek white pot, it blends beautifully with both modern and classic interiors. Easy to care for and wonderfully versatile, the asparagus fern thrives in bright, indirect light and appreciates regular watering to keep its lush look. Plant care: Prefers indirect light; keep soil lightly moist Style tip: Place on a shelf or side table to let its fronds spill gracefully over the edges Perfect for: Gifting, home styling, or adding a refreshing your indoor space A timeless choice for plant lovers, this asparagus fern brings softness and greenery to your everyday surroundings.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1494</qty>
+        <qty>1493</qty>
         <consist name="Fern" unit="pcs">1</consist>
       </offer>
       <offer id="55786305880450" available="true">
@@ -21316,7 +21320,7 @@
         <url>https://www.flowerstation.co.uk/products/dancing-queen</url>
         <name>Dancing Queen</name>
         <categoryId>19</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/DancingQueen.png?v=1761138095</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/2_e8681035-470c-4ccf-9f74-a13c81bbb179.png?v=1782993650</picture>
         <price>40</price>
         <oldprice>40</oldprice>
         <currencyId>GBP</currencyId>
@@ -21331,8 +21335,8 @@
         <name>Fire For You</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/FireForYou1.png?v=1761823810</picture>
-        <price>40</price>
-        <oldprice>40</oldprice>
+        <price>35</price>
+        <oldprice>35</oldprice>
         <currencyId>GBP</currencyId>
         <description>Hotter than your ex’s DMs. This blazing mix of orange alstroemeria, red hypericum berries, and orange spray roses brings major “main character” energy. Green bell foliage keeps it fresh, because even fire needs balance.Gift it when: You want to say “You set my world on fire.” Or when someone just aced life and deserves flames in floral form. 🔥🔥🔥 CONTAIN: x5 orange spray rose, x5 orange alstroemeria, x5 red hypericum, x5 wild pitto, x5 ruscus, x5 greenbell</description>
         <param name="width, mm">350</param>
@@ -21355,20 +21359,6 @@
         <consist name="Alstroemeria" unit="pcs">1</consist>
         <consist name="Hydrangea" unit="pcs">1</consist>
       </offer>
-      <offer id="55834967409026" available="true">
-        <url>https://www.flowerstation.co.uk/products/merry-and-bright</url>
-        <name>Sunset Walks</name>
-        <categoryId>19</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/MerryandBright.png?v=1761138329</picture>
-        <price>55</price>
-        <oldprice>55</oldprice>
-        <currencyId>GBP</currencyId>
-        <description>Louder than Mariah Carey in December. This bouquet screams festive cheer with orange roses, red alstroemeria, and sunshine-yellow achillea. Basically, fairy lights in flower form.Gift it when: Someone’s been nice (or naughty but charming). CONTAIN: x10 orange african rose, x5 green hypericum, x5 red alstroemeria, x5 achilea, x5 orange carthamus, x5 pitto</description>
-        <param name="width, mm">350</param>
-        <param name="height, mm">400</param>
-        <consist name="Rose" unit="pcs">1</consist>
-        <consist name="Alstroemeria" unit="pcs">1</consist>
-      </offer>
       <offer id="55834972586370" available="true">
         <url>https://www.flowerstation.co.uk/products/kissmas</url>
         <name>Sweet Gumdrop</name>
@@ -21388,9 +21378,9 @@
         <url>https://www.flowerstation.co.uk/products/berry-in-love</url>
         <name>Berry in Love</name>
         <categoryId>19</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/BerryinLove.png?v=1760980840</picture>
-        <price>40</price>
-        <oldprice>40</oldprice>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Berry_in_Love.png?v=1782994321</picture>
+        <price>35</price>
+        <oldprice>35</oldprice>
         <currencyId>GBP</currencyId>
         <description>Soft, sweet, and totally swoon-worthy. Pink and white hypericum berries with fresh green bell... it’s giving rom-com picnic scene.Gift it when: You’re still in the honeymoon phase. Also great for BFFs who deserve a little heart-eye energy CONTAIN: x7 red hypericum, x7 white hypericum, x5 greenbell, x15 ruscus</description>
         <param name="width, mm">350</param>
@@ -21402,9 +21392,9 @@
         <url>https://www.flowerstation.co.uk/products/twinkle-toes</url>
         <name>Twinkle Toes</name>
         <categoryId>19</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/TwinkleToes.png?v=1761138493</picture>
-        <price>37</price>
-        <oldprice>37</oldprice>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/1_84bc66c8-e33c-4faa-9ec7-a7ce01bb0b3c.png?v=1782994191</picture>
+        <price>30</price>
+        <oldprice>30</oldprice>
         <currencyId>GBP</currencyId>
         <description>Light on its feet, easy on the eyes, and ready to twirl into someone’s heart. This petite powerhouse pairs hot pink alstroemeria with peach hypericum for maximum sparkle.Gift it when: You want to make someone smile, say “thinking of you,” or show that even small gestures can have big pizzazz. Perfect for anyone who loves a little flair with their flowers. CONTAIN: x7 pink hypericum, x10 red alstroemeria, x15 ruscus</description>
         <param name="width, mm">350</param>
@@ -21570,7 +21560,7 @@
         <description>Celebrate new arrivals with this playful blend of dark chocolate, almond, and a hint of sea salt. Lighten the mood for tired new parents with this fun, cheerful blue wrapper. Crafted with love, Tony’s Chocolonely bars bring joy while supporting ethical chocolate.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1496</qty>
+        <qty>1495</qty>
       </offer>
       <offer id="55863270048130" available="true">
         <url>https://www.flowerstation.co.uk/products/happy-anniversary-dark-chocolate-almond-sea-salt-tony-s-chocolonely-180g</url>
@@ -21583,7 +21573,7 @@
         <description>Mark a special milestone with luxurious dark chocolate, enriched with almonds and sea Celebrate a special milestone with this indulgent dark chocolate bar, perfectly balanced with crunchy almonds and a touch of sea salt. Each bar comes in a uniquely designed wrapper, making it a beautiful and thoughtful gift for anniversaries</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1497</qty>
+        <qty>1495</qty>
       </offer>
       <offer id="55863274176898" available="true">
         <url>https://www.flowerstation.co.uk/products/you-are-the-best-dark-chocolate-almond-sea-salt-tony-s-chocolonely-180g</url>
@@ -21608,7 +21598,7 @@
         <description>This bar truly has it all: creamy milk chocolate packed with sticky caramel, crunchy almonds, savory pretzels, sweet nougat, and a sprinkle of flaky sea salt. Wrapped in our unique design, adding a fun and playful touch that&apos;s perfect for your loved one. Crafted with love, Tony’s Chocolonely bars not only delight the taste buds but also support ethical chocolate practices, ensuring every bite contributes to a fairer cocoa industry.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1495</qty>
+        <qty>1493</qty>
       </offer>
       <offer id="55863280992642" available="true">
         <url>https://www.flowerstation.co.uk/products/i-love-you-milk-chocolate-tony-s-chocolonely-180g</url>
@@ -21621,7 +21611,7 @@
         <description>Say it sweetly with creamy rich dark chocolate. Wrapped in a uniquely designed bar that simply and beautifully conveys “I LOVE YOU,” Tony’s Chocolonely ensures every bite is both heartfelt and ethically sourced.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1490</qty>
+        <qty>1485</qty>
       </offer>
       <offer id="55863281844610" available="true">
         <url>https://www.flowerstation.co.uk/products/congrats-milk-chocolate-tony-s-chocolonely-180g</url>
@@ -21634,7 +21624,7 @@
         <description>Celebrate achievements with smooth, creamy milk chocolate, crafted with care and wrapped in a uniquely designed bar. Perfect to gift to someone for a promotion, graduation, or any milestone, this bar not only delights the taste buds but also shows you care. Tony’s Chocolonely supports a fairer chocolate industry worldwide, making every bite both meaningful and ethical.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1487</qty>
+        <qty>1486</qty>
       </offer>
       <offer id="55863282762114" available="true">
         <url>https://www.flowerstation.co.uk/products/happy-birthday-milk-chocolate-tony-s-chocolonely-50g</url>
@@ -21684,7 +21674,7 @@
         <description>Say it loud with this bar of rich dark chocolate, crunchy almonds, and a hint of sea salt. Ideal for showing appreciation to someone special, celebrating achievements, or simply reminding someone they’re amazing. Made by Tony’s Chocolonely, it’s ethically sourced and packed with intense flavour that chocolate lovers will adore.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1423</qty>
+        <qty>1420</qty>
       </offer>
       <offer id="55863291183490" available="true">
         <url>https://www.flowerstation.co.uk/products/happy-birthday-dark-chocolate-almond-sea-salt-tony-s-chocolonely-50g</url>
@@ -22193,7 +22183,7 @@
         <description>Celebrate their big moment with something irresistibly delicious. This bar blends creamy milk chocolate with golden caramel and a hint of sea salt - crafted to make every achievement taste even sweeter. The perfect pocket-sized gift to mark promotions, exams, or milestones. And with Tony’s Chocolonely, your gift helps support a fairer chocolate world.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1494</qty>
+        <qty>1490</qty>
       </offer>
       <offer id="55965613949314" available="true">
         <url>https://www.flowerstation.co.uk/products/i-love-you-milk-chocolate-pretzel-toffee-tony-s-chocolonely-180g</url>
@@ -22218,7 +22208,7 @@
         <description>Let them know just how sweet they truly are with this indulgent Everything Bar. A celebration of all things delicious, rich chocolate, irresistible textures, and the signature Tony’s touch. Perfect for birthdays, thank-yours, or moments that deserve a little extra sugar. Cheeky, funny, and guaranteed to bring a smile. Warning: not suitable for pets… or anyone who can’t handle maximum sweetness.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1494</qty>
+        <qty>1493</qty>
       </offer>
       <offer id="55979034673538" available="true">
         <url>https://www.flowerstation.co.uk/products/potted-orange-guzmania</url>
@@ -22238,13 +22228,13 @@
         <name>Potted Red Guzmania</name>
         <categoryId>3</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/8_2699b66b-3748-4bc7-a59b-afe9a410613a.png?v=1763385470</picture>
-        <price>35</price>
-        <oldprice>35</oldprice>
+        <price>29</price>
+        <oldprice>29</oldprice>
         <currencyId>GBP</currencyId>
         <description>Add a touch of exotic elegance to your space with our Red Guzmania. Its striking crimson flower bracts rise proudly from lush green foliage, creating a stunning contrast that instantly brightens any room.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1495</qty>
+        <qty>1494</qty>
       </offer>
       <offer id="55985384259970" available="true">
         <url>https://www.flowerstation.co.uk/products/twenty20</url>
@@ -22421,7 +22411,7 @@
         <url>https://www.flowerstation.co.uk/products/winter-solstice</url>
         <name>Winter Solstice </name>
         <categoryId>5</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/WinterSolstice_2.png?v=1764589660</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/1_e4c6d17f-c8e9-46fb-be33-ff407e34334d.png?v=1782994093</picture>
         <price>40</price>
         <oldprice>40</oldprice>
         <currencyId>GBP</currencyId>
@@ -22710,7 +22700,7 @@
         <description>Perfect for Upgraded Deluxe Bouquets (but not for biggest luxury ones). Dimensions: Height: 22cm, Width: 12cm.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1492</qty>
+        <qty>1491</qty>
       </offer>
       <offer id="56110621065602" available="true">
         <url>https://www.flowerstation.co.uk/products/flower-station-gift-card-2</url>
@@ -23389,7 +23379,7 @@
         <description>This precious teddy bear is wrapped in softness and love, holding a bright red heart stitched with the words “I Love You.” With its gentle smile and cuddly charm, it’s the perfect little reminder of affection - made to be hugged, cherished, and gifted to someone special, just to make their heart smile. 💕🧸</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1492</qty>
+        <qty>1490</qty>
       </offer>
       <offer id="56318701928834" available="true">
         <url>https://www.flowerstation.co.uk/products/fiery-red-radiance-紅耀春光</url>
@@ -23978,7 +23968,7 @@
       <offer id="56319026168194" available="true">
         <url>https://www.flowerstation.co.uk/products/sunbeam-violet-joy-紫韻晨光-1</url>
         <name>Sunbeam Violet Joy - 紫韻晨光</name>
-        <categoryId>5</categoryId>
+        <categoryId>20</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/front-res__59720.1691061686.600.600.jpg?v=1720801836</picture>
         <price>55</price>
         <oldprice>60</oldprice>
@@ -24050,7 +24040,7 @@
       <offer id="56319042257282" available="true">
         <url>https://www.flowerstation.co.uk/products/little-sun-rider-小駿花晨</url>
         <name>Little Sun Rider - 小駿花晨 - Standard</name>
-        <categoryId>5</categoryId>
+        <categoryId>20</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/20e31fd9-c120-4660-875c-b4ec1c96f928__23559.1692186459.800.800.jpg?v=1720801793</picture>
         <price>45</price>
         <oldprice>69</oldprice>
@@ -24065,7 +24055,7 @@
       <offer id="56319042290050" available="true">
         <url>https://www.flowerstation.co.uk/products/little-sun-rider-小駿花晨</url>
         <name>Little Sun Rider - 小駿花晨 - Deluxe</name>
-        <categoryId>5</categoryId>
+        <categoryId>20</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/20e31fd9-c120-4660-875c-b4ec1c96f928__23559.1692186459.800.800.jpg?v=1720801793</picture>
         <price>63</price>
         <oldprice>97</oldprice>
@@ -24245,7 +24235,7 @@
         <description>Share your feelings with this helium heart balloon featuring a soft botanical design and “I Love You” message. A perfect add-on for Valentine’s Day, anniversaries, or romantic flower deliveries.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1494</qty>
+        <qty>1491</qty>
       </offer>
       <offer id="56330579444098" available="true">
         <url>https://www.flowerstation.co.uk/products/blush-gold-i-love-you-balloon</url>
@@ -24472,7 +24462,7 @@
         <url>https://www.flowerstation.co.uk/products/pride-bouquet</url>
         <name>Pride Bouquet - Standard</name>
         <categoryId>5</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/flower-station-pride-bouquet-colourful-mixed-flowers-a1b2c3d4.jpg?v=1780924943</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Pride_Bouquet_Images.png?v=1782206587</picture>
         <price>60</price>
         <oldprice>60</oldprice>
         <currencyId>GBP</currencyId>
@@ -24490,7 +24480,7 @@
         <url>https://www.flowerstation.co.uk/products/pride-bouquet</url>
         <name>Pride Bouquet - Deluxe</name>
         <categoryId>5</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/flower-station-pride-bouquet-colourful-mixed-flowers-a1b2c3d4.jpg?v=1780924943</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Pride_Bouquet_Images.png?v=1782206587</picture>
         <price>84</price>
         <oldprice>84</oldprice>
         <currencyId>GBP</currencyId>
@@ -24686,9 +24676,9 @@
         <url>https://www.flowerstation.co.uk/products/happy-ever-after</url>
         <name>Happy Ever After - Standard</name>
         <categoryId>19</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/HappyEverAfter.png?v=1761137874</picture>
-        <price>40</price>
-        <oldprice>40</oldprice>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/1_5fc0af15-4470-4f1d-b42d-5e9e1c76b14c.png?v=1782993951</picture>
+        <price>38</price>
+        <oldprice>38</oldprice>
         <currencyId>GBP</currencyId>
         <description>Celebrate love, joy, and new beginnings with Happy Ever After. Soft pink and white carnations mingle with delicate pink spray roses, crisp white stocks, and striking blue thistle, creating a bouquet that’s romantic, whimsical, and full of charm.Perfect for weddings, anniversaries, or simply brightening someone’s day, this bouquet is a beautiful reminder that every story deserves a happy ending. STANDARD: x5 light pink carnation, x4 light pink spray rose, x5 white lisianthus, x5 white stock, x3 white thistle, x5 greenbell DELUXE: x7 light pink carnation, x6 light pink spray rose, x7 white lisianthus, x7 white stock, x5 white thistle, x7 greenbell</description>
         <param name="width, mm">350</param>
@@ -24701,9 +24691,9 @@
         <url>https://www.flowerstation.co.uk/products/happy-ever-after</url>
         <name>Happy Ever After - Deluxe</name>
         <categoryId>19</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/HappyEverAfter.png?v=1761137874</picture>
-        <price>60</price>
-        <oldprice>60</oldprice>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/1_5fc0af15-4470-4f1d-b42d-5e9e1c76b14c.png?v=1782993951</picture>
+        <price>50</price>
+        <oldprice>50</oldprice>
         <currencyId>GBP</currencyId>
         <description>Celebrate love, joy, and new beginnings with Happy Ever After. Soft pink and white carnations mingle with delicate pink spray roses, crisp white stocks, and striking blue thistle, creating a bouquet that’s romantic, whimsical, and full of charm.Perfect for weddings, anniversaries, or simply brightening someone’s day, this bouquet is a beautiful reminder that every story deserves a happy ending. STANDARD: x5 light pink carnation, x4 light pink spray rose, x5 white lisianthus, x5 white stock, x3 white thistle, x5 greenbell DELUXE: x7 light pink carnation, x6 light pink spray rose, x7 white lisianthus, x7 white stock, x5 white thistle, x7 greenbell</description>
         <param name="width, mm">350</param>
@@ -24744,9 +24734,9 @@
         <url>https://www.flowerstation.co.uk/products/summer-romance</url>
         <name>Summer Romance - Standard</name>
         <categoryId>19</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/SilentNight.png?v=1761138283</picture>
-        <price>45</price>
-        <oldprice>45</oldprice>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Summer_Romance_1.png?v=1782993403</picture>
+        <price>35</price>
+        <oldprice>35</oldprice>
         <currencyId>GBP</currencyId>
         <description>A classy festive crush — red roses, pink hypericum berries, and lush greens that whisper “I’m elegant, but I still love mulled wine.”Gift it when: You’re meeting the in-laws, decorating the table, or trying to look like you’ve got your festive life together. STANDARD: x10 red african rose, x5 red hypericum, x10 wild pitto DELUXE: x20 red african rose, x10 red hypericum, x15 wild pitto</description>
         <param name="width, mm">350</param>
@@ -24759,9 +24749,9 @@
         <url>https://www.flowerstation.co.uk/products/summer-romance</url>
         <name>Summer Romance - Deluxe</name>
         <categoryId>19</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/SilentNight.png?v=1761138283</picture>
-        <price>63</price>
-        <oldprice>63</oldprice>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Summer_Romance_1.png?v=1782993403</picture>
+        <price>50</price>
+        <oldprice>50</oldprice>
         <currencyId>GBP</currencyId>
         <description>A classy festive crush — red roses, pink hypericum berries, and lush greens that whisper “I’m elegant, but I still love mulled wine.”Gift it when: You’re meeting the in-laws, decorating the table, or trying to look like you’ve got your festive life together. STANDARD: x10 red african rose, x5 red hypericum, x10 wild pitto DELUXE: x20 red african rose, x10 red hypericum, x15 wild pitto</description>
         <param name="width, mm">350</param>
@@ -24898,8 +24888,8 @@
         <name>Midnight Passion - Standard</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/ChatGPT_Image_Feb_2_2026_11_59_16_PM.png?v=1770058812</picture>
-        <price>45</price>
-        <oldprice>45</oldprice>
+        <price>35</price>
+        <oldprice>35</oldprice>
         <currencyId>GBP</currencyId>
         <description>Add a touch of regal charm to your space with &quot;Midnight Passion&quot;, an elegant yet affordable bouquet. Featuring deep burgundy carnations and delicate pink spray roses, beautifully contrasted with soft white roses and eucalyptus, this arrangement brings style and sophistication without breaking the bank. Perfect for everyday moments or thoughtful gifting, &quot;Midnight Passion&quot; proves that beauty doesn’t have to come at a high price. STANDARD: Purple Carnations x5, Hot Pink Spray Roses x3, White African Roses x5, Hot Pink Limonium x5, Green Bell + Eucalyptus DELUXE: Purple Carnations x10, Hot Pink Spray Roses x6, White African Roses x10, Hot Pink Limonium x10, Green Bell + Eucalyptus</description>
         <param name="width, mm">350</param>
@@ -24913,8 +24903,8 @@
         <name>Midnight Passion - Deluxe</name>
         <categoryId>19</categoryId>
         <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/ChatGPT_Image_Feb_2_2026_11_59_50_PM.png?v=1770058844</picture>
-        <price>70</price>
-        <oldprice>70</oldprice>
+        <price>60</price>
+        <oldprice>60</oldprice>
         <currencyId>GBP</currencyId>
         <description>Add a touch of regal charm to your space with &quot;Midnight Passion&quot;, an elegant yet affordable bouquet. Featuring deep burgundy carnations and delicate pink spray roses, beautifully contrasted with soft white roses and eucalyptus, this arrangement brings style and sophistication without breaking the bank. Perfect for everyday moments or thoughtful gifting, &quot;Midnight Passion&quot; proves that beauty doesn’t have to come at a high price. STANDARD: Purple Carnations x5, Hot Pink Spray Roses x3, White African Roses x5, Hot Pink Limonium x5, Green Bell + Eucalyptus DELUXE: Purple Carnations x10, Hot Pink Spray Roses x6, White African Roses x10, Hot Pink Limonium x10, Green Bell + Eucalyptus</description>
         <param name="width, mm">350</param>
@@ -25038,11 +25028,11 @@
         <url>https://www.flowerstation.co.uk/products/lovers-lane-indulgence</url>
         <name>Lovers Lane Indulgence</name>
         <categoryId>12</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/5_009e2bec-8861-4b73-91a7-ea516fae97d3.png?v=1771000620</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Flower_Station_Gift_Set_Images_Ferrero_Choc_2_1.png?v=1783339304</picture>
         <price>375</price>
         <oldprice>375</oldprice>
         <currencyId>GBP</currencyId>
-        <description>A classic bouquet of sumptuous roses, designed in a contemporary dome shape with no additional flowers or foliage. Elegant and refined, this arrangement is paired with Moët &amp; Chandon Champagne and award-winning Cárdenas chocolate bars from Ecuador. Renowned for their exceptional quality and rich, smooth texture, this gift set is a beautifully balanced Valentine’s gift.</description>
+        <description>A classic bouquet of sumptuous roses, designed in a contemporary dome shape with no additional flowers or foliage. Elegant and refined, this arrangement is paired with Moët &amp; Chandon Champagne and Ferrero Rocher Chocolate Pralines. Renowned for their exceptional quality and rich, smooth texture, this gift set is a beautifully balanced Valentine’s gift.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
       </offer>
@@ -25488,11 +25478,11 @@
         <url>https://www.flowerstation.co.uk/products/artisinal-indulgence-set</url>
         <name>Artisinal Indulgence Set</name>
         <categoryId>12</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/31.png?v=1771930120</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Flower_Station_Gift_Set_Images_Ferrero_Choc_1.png?v=1783339247</picture>
         <price>185</price>
         <oldprice>185</oldprice>
         <currencyId>GBP</currencyId>
-        <description>Kentia &amp; Ivy Bowl, award-winning Ecuadorian chocolate and our signature No.55 candle. Luxurious Mother’s Day gift designed to last. Our Kentia &amp; Ivy Bowl features mini Kentia palms and trailing ivy, beautifully arranged in a contemporary planter. A gift that continues to grow long after Mother’s Day. Paired alongside is the exquisite Torquilla Handwoven Case of chocolates by Susana Cárdenas. Beautifully crafted and presented, this special collection includes six bars of Susana’s award-winning chocolate. Every bar is a tribute to Ecuador’s history, its communities, and its future. Completing the gift is our exclusive No.55 candle. A signature scent named after our flagship store at 55 Park Road, where Flower Station began over 20 years ago. Handcrafted with delicate notes of berries, geranium, rose and jasmine, it fills any space with a beautifully layered floral fragrance created by those who know flowers best. Elegant, meaningful, and designed to be enjoyed well beyond the day itself. A truly special way to celebrate Mum.</description>
+        <description>Kentia &amp; Ivy Bowl, Ferrero Rocher Chocolate Pralines and our signature No.55 candle. Luxurious Mother’s Day gift designed to last. Our Kentia &amp; Ivy Bowl features mini Kentia palms and trailing ivy, beautifully arranged in a contemporary planter. A gift that continues to grow long after Mother’s Day. Paired alongside is the Ferrero Rocher Chocolate Pralines. Completing the gift is our exclusive No.55 candle. A signature scent named after our flagship store at 55 Park Road, where Flower Station began over 20 years ago. Handcrafted with delicate notes of berries, geranium, rose and jasmine, it fills any space with a beautifully layered floral fragrance created by those who know flowers best. Elegant, meaningful, and designed to be enjoyed well beyond the day itself. A truly special way to celebrate Mum.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
       </offer>
@@ -25512,11 +25502,11 @@
         <url>https://www.flowerstation.co.uk/products/mum-you-re-tremendous</url>
         <name>Mum, You’re Tremendous</name>
         <categoryId>12</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/71.png?v=1771930488</picture>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/Flower_Station_Gift_Set_Images_Ferrero_Choc_1_1.png?v=1783339124</picture>
         <price>175</price>
         <oldprice>175</oldprice>
         <currencyId>GBP</currencyId>
-        <description>Three magnificent white orchids paired with Cárdenas Luxury Ecuadorian chocolate. Lasting floral elegance and rich indulgence for Mother’s Day. Tremendous Orchids is a statement of timeless beauty. This magnificent planted arrangement includes three extra-large white orchids set in a handmade glass vase, finished with luscious moss. A long-lasting favourite of many of our customers, it’s a gift that never fails to impress. Paired with four bars of Cárdenas award-winning chocolate presented in a beautifully crafted wooden box. Each bar celebrates Ecuador’s fine flavour cacao and the craftsmanship behind it. Sophisticated, thoughtful and designed to be enjoyed well beyond the day itself.</description>
+        <description>Three magnificent white orchids paired with Ferrero Rocher Chocolate Pralines. Lasting floral elegance and rich indulgence for Mother’s Day. Tremendous Orchids is a statement of timeless beauty. This magnificent planted arrangement includes three extra-large white orchids set in a handmade glass vase, finished with luscious moss. A long-lasting favourite of many of our customers, it’s a gift that never fails to impress. Paired with Ferrero Rocher Chocolate Pralines chocolate. Each bite celebrates Ecuador’s fine flavour cacao and the craftsmanship behind it. Sophisticated, thoughtful and designed to be enjoyed well beyond the day itself.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
       </offer>
@@ -25903,19 +25893,6 @@
         <param name="height, mm">400</param>
         <qty>1</qty>
       </offer>
-      <offer id="56484230103426" available="true">
-        <url>https://www.flowerstation.co.uk/products/flower-station-gift-card-2</url>
-        <name>Flower Station Gift Card - £6656785063.00</name>
-        <categoryId>25</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/gift-card.png?v=1757683231</picture>
-        <price>6656785063</price>
-        <oldprice>6656785063</oldprice>
-        <currencyId>GBP</currencyId>
-        <description>Flower Station Gift Card - £6656785063.00</description>
-        <param name="width, mm">350</param>
-        <param name="height, mm">400</param>
-        <qty>1</qty>
-      </offer>
       <offer id="56489588064642" available="true">
         <url>https://www.flowerstation.co.uk/products/neighbourhood-watch-bouquet</url>
         <name>Neighbourhood Watch Bouquet</name>
@@ -25928,58 +25905,6 @@
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
       </offer>
-      <offer id="56492065292674" available="true">
-        <url>https://www.flowerstation.co.uk/products/flower-station-gift-card-2</url>
-        <name>Flower Station Gift Card - £6911456058.00</name>
-        <categoryId>25</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/gift-card.png?v=1757683231</picture>
-        <price>6911456058</price>
-        <oldprice>6911456058</oldprice>
-        <currencyId>GBP</currencyId>
-        <description>Flower Station Gift Card - £6911456058.00</description>
-        <param name="width, mm">350</param>
-        <param name="height, mm">400</param>
-        <qty>1</qty>
-      </offer>
-      <offer id="56492747096450" available="true">
-        <url>https://www.flowerstation.co.uk/products/flower-station-gift-card-2</url>
-        <name>Flower Station Gift Card - £7164014291.00</name>
-        <categoryId>25</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/gift-card.png?v=1757683231</picture>
-        <price>7164014291</price>
-        <oldprice>7164014291</oldprice>
-        <currencyId>GBP</currencyId>
-        <description>Flower Station Gift Card - £7164014291.00</description>
-        <param name="width, mm">350</param>
-        <param name="height, mm">400</param>
-        <qty>1</qty>
-      </offer>
-      <offer id="56494721139074" available="true">
-        <url>https://www.flowerstation.co.uk/products/flower-station-gift-card-2</url>
-        <name>Flower Station Gift Card - £2350805341.00</name>
-        <categoryId>25</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/gift-card.png?v=1757683231</picture>
-        <price>2350805341</price>
-        <oldprice>2350805341</oldprice>
-        <currencyId>GBP</currencyId>
-        <description>Flower Station Gift Card - £2350805341.00</description>
-        <param name="width, mm">350</param>
-        <param name="height, mm">400</param>
-        <qty>1</qty>
-      </offer>
-      <offer id="56501062730114" available="true">
-        <url>https://www.flowerstation.co.uk/products/flower-station-gift-card-2</url>
-        <name>Flower Station Gift Card - £8800371986.00</name>
-        <categoryId>25</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/gift-card.png?v=1757683231</picture>
-        <price>8800371986</price>
-        <oldprice>8800371986</oldprice>
-        <currencyId>GBP</currencyId>
-        <description>Flower Station Gift Card - £8800371986.00</description>
-        <param name="width, mm">350</param>
-        <param name="height, mm">400</param>
-        <qty>1</qty>
-      </offer>
       <offer id="56504425906562" available="true">
         <url>https://www.flowerstation.co.uk/products/flower-station-gift-card-2</url>
         <name>Flower Station Gift Card - £20.00</name>
@@ -25989,19 +25914,6 @@
         <oldprice>20</oldprice>
         <currencyId>GBP</currencyId>
         <description>Flower Station Gift Card - £20.00</description>
-        <param name="width, mm">350</param>
-        <param name="height, mm">400</param>
-        <qty>1</qty>
-      </offer>
-      <offer id="56508215689602" available="true">
-        <url>https://www.flowerstation.co.uk/products/flower-station-gift-card-2</url>
-        <name>Flower Station Gift Card - £7699219632.00</name>
-        <categoryId>25</categoryId>
-        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/gift-card.png?v=1757683231</picture>
-        <price>7699219632</price>
-        <oldprice>7699219632</oldprice>
-        <currencyId>GBP</currencyId>
-        <description>Flower Station Gift Card - £7699219632.00</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
         <qty>1</qty>
@@ -26375,7 +26287,7 @@
         <param name="height, mm">400</param>
         <consist name="Rose" unit="pcs">1</consist>
       </offer>
-      <offer id="56661782069634" available="true">
+      <offer id="56661782069634" available="false">
         <url>https://www.flowerstation.co.uk/products/blue-ezra-elephant-14cm</url>
         <name>Ezra Blue Elephant (14cm)</name>
         <categoryId>9</categoryId>
@@ -26386,7 +26298,6 @@
         <description>A powder blue elephant teddy with floppy ears and a super-soft texture, making a lovely keepsake for baby gifts and special occasions.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1487</qty>
       </offer>
       <offer id="56661782593922" available="true">
         <url>https://www.flowerstation.co.uk/products/kozy-koala-14cm</url>
@@ -26399,7 +26310,7 @@
         <description>A plush grey koala teddy with soft cream accents and a comforting design, perfect for sending hugs from afar.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1497</qty>
+        <qty>1492</qty>
       </offer>
       <offer id="56661783576962" available="true">
         <url>https://www.flowerstation.co.uk/products/pink-rosie-bunny-15cm</url>
@@ -26412,7 +26323,7 @@
         <description>A soft pink bunny teddy full of charm and sweetness, perfect for celebrating love, new arrivals, or simply making someone smile.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1481</qty>
+        <qty>1469</qty>
       </offer>
       <offer id="56661787509122" available="true">
         <url>https://www.flowerstation.co.uk/products/cream-rosie-bunny-15cm</url>
@@ -26425,7 +26336,7 @@
         <description>A cream bunny teddy with a cuddly design and gentle expression, ideal for adding warmth and comfort to any gift.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1496</qty>
+        <qty>1495</qty>
       </offer>
       <offer id="56661788328322" available="true">
         <url>https://www.flowerstation.co.uk/products/grey-rosie-bunny-15cm</url>
@@ -26438,7 +26349,7 @@
         <description>A soft grey bunny teddy with floppy ears and a cosy finish, bringing a calming and comforting touch to any bouquet or gift.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1500</qty>
+        <qty>1498</qty>
       </offer>
       <offer id="56661788787074" available="true">
         <url>https://www.flowerstation.co.uk/products/happy-birthday-bear-15cm</url>
@@ -26451,7 +26362,7 @@
         <description>Send them the cutest birthday wishes with our adorable Happy Birthday bear. This way, they can remember their special day for even longer.</description>
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
-        <qty>1489</qty>
+        <qty>1487</qty>
       </offer>
       <offer id="56704554697090" available="true">
         <url>https://www.flowerstation.co.uk/products/peace-lily-in-a-white-pot</url>
@@ -26465,6 +26376,34 @@
         <param name="width, mm">350</param>
         <param name="height, mm">400</param>
         <consist name="Lily" unit="pcs">1</consist>
+      </offer>
+      <offer id="56738590916994" available="true">
+        <url>https://www.flowerstation.co.uk/products/merry-and-bright</url>
+        <name>Sunset Walks - Standard</name>
+        <categoryId>19</categoryId>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/1_cbb463b8-d288-4061-bb48-76f59900ad71.png?v=1782993832</picture>
+        <price>39</price>
+        <oldprice>39</oldprice>
+        <currencyId>GBP</currencyId>
+        <description>Louder than Mariah Carey in December. This bouquet screams festive cheer with orange roses, red alstroemeria, and sunshine-yellow achillea. Basically, fairy lights in flower form.Gift it when: Someone’s been nice (or naughty but charming). CONTAIN: x10 orange african rose, x5 green hypericum, x5 red alstroemeria, x5 achilea, x5 orange carthamus, x5 pitto</description>
+        <param name="width, mm">350</param>
+        <param name="height, mm">400</param>
+        <consist name="Rose" unit="pcs">1</consist>
+        <consist name="Alstroemeria" unit="pcs">1</consist>
+      </offer>
+      <offer id="56738590949762" available="true">
+        <url>https://www.flowerstation.co.uk/products/merry-and-bright</url>
+        <name>Sunset Walks - Deluxe</name>
+        <categoryId>19</categoryId>
+        <picture>https://cdn.shopify.com/s/files/1/0829/4730/9898/files/1_cbb463b8-d288-4061-bb48-76f59900ad71.png?v=1782993832</picture>
+        <price>55</price>
+        <oldprice>55</oldprice>
+        <currencyId>GBP</currencyId>
+        <description>Louder than Mariah Carey in December. This bouquet screams festive cheer with orange roses, red alstroemeria, and sunshine-yellow achillea. Basically, fairy lights in flower form.Gift it when: Someone’s been nice (or naughty but charming). CONTAIN: x10 orange african rose, x5 green hypericum, x5 red alstroemeria, x5 achilea, x5 orange carthamus, x5 pitto</description>
+        <param name="width, mm">350</param>
+        <param name="height, mm">400</param>
+        <consist name="Rose" unit="pcs">1</consist>
+        <consist name="Alstroemeria" unit="pcs">1</consist>
       </offer>
   </offers>
 </yml_catalog>
