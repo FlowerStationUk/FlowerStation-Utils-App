@@ -197,8 +197,8 @@ export function buildXmlFeed(variants, shopInfo) {
       xml += `        <qty>${effectiveQty}</qty>\n`;
     }
 
-    for (const item of consistItems) {
-      xml += `        <consist name="${escapeXml(item.name)}" unit=".">${item.qty}</consist>\n`;
+    for (let i = 0; i < consistItems.length; i++) {
+      xml += `        <consist name="${escapeXml(consistItems[i].name)}" unit=".">${i + 1}</consist>\n`;
     }
     xml += `      </offer>\n`;
   }
