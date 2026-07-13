@@ -196,6 +196,10 @@ export function buildXmlFeed(variants, shopInfo) {
     if (!shouldOmitQty && effectiveQty > 0) {
       xml += `        <qty>${effectiveQty}</qty>\n`;
     }
+
+    for (const item of consistItems) {
+      xml += `        <consist name="${escapeXml(item.name)}" unit=".">${item.qty}</consist>\n`;
+    }
     xml += `      </offer>\n`;
   }
   
